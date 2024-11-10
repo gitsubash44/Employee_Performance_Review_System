@@ -8,6 +8,9 @@ urlpatterns = [
     path('login/',views.user_login, name="user_login"),
 
 
+    #manager
+    path('manager_dashboard/', views.manager_dashboard, name="manager_dashboard"),
+
     # employer
     path('employer_dashboard/', views.employer_dashboard, name="employer_dashboard"),
 

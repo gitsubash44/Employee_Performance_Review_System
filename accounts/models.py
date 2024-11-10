@@ -14,5 +14,17 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
     
-    
 
+
+
+class PerformanceReview(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # employee or intern
+    date = models.DateTimeField(auto_now_add=True)
+    productivity_score = models.IntegerField()
+    punctuality_score = models.IntegerField()
+    collaboration_score = models.IntegerField()
+    goals = models.TextField()
+    feedback = models.TextField()
+
+    def __str__(self):
+        return f"Review for {self.user.username} on {self.date}"

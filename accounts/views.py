@@ -48,12 +48,14 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
+            print(user.user_type)  # Check what user type is being returned
+
             login(request, user)
             # Redirect based on user type
             if user.user_type == UserTypes.EMPLOYER:
                 return redirect('employer_dashboard')  
             elif user.user_type == UserTypes.MANAGER:
-                return redirect('employer_dashboard')   
+                return redirect('manager_dashboard')   
             elif user.user_type == UserTypes.INTERN:
                 return redirect('intern_dashboard')    
             else:
@@ -66,6 +68,12 @@ def user_login(request):
             return redirect('user_login')
 
     return render(request, "registration/login.html")
+
+
+
+# manager 
+def manager_dashboard(request):
+    return render(request, "manager/manager_dashboard.html")
 
 
 # employer
