@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Intern Work Detail</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Manager Portal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#">Review Panel</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+                        <li class="nav-item"><a class="nav-link text-danger" href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+        <!-- Page Content -->
+        <div class="container my-5">
+            <h2 class="mb-4">Intern Work Detail</h2>
+    
+            <!-- Intern Info Section -->
+            <div class="card p-4 shadow mb-4">
+                <h4>Intern Information</h4>
+                <p><strong>Name:</strong> Vaidya vai</p>
+                <p><strong>Position:</strong> Marketing Intern</p>
+                <p><strong>Current Status:</strong> In Progress</p>
+            </div>
+    
+            <!-- Performance Review Section -->
+            <div class="card p-4 shadow mb-4">
+                <h4>Performance Reviews</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Q1 Review</span>
+                        <span class="badge bg-success">Positive</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Q2 Review</span>
+                        <span class="badge bg-warning">Needs Improvement</span>
+                    </li>
+                </ul>
+            </div>
+    
+            <!-- Performance Metrics Section -->
+            <div class="card p-4 shadow mb-4">
+                <h4>Performance Metrics</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Productivity:</strong> 80%</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Punctuality:</strong> 90%</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Collaboration:</strong> 85%</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Goal Achievement:</strong> 75%</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Feedback Section -->
+            <div class="card p-4 shadow mb-4">
+                <h4>Manager Feedback</h4>
+                <p><strong>Recent Feedback:</strong> Jane has shown great improvement in communication and initiative. Needs to work more on meeting project deadlines consistently.</p>
+            </div>
+    
+            <!-- Goals Section -->
+            <div class="card p-4 shadow mb-4">
+                <h4>Assigned Goals</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Complete Digital Marketing Course</span>
+                        <span class="badge bg-primary">In Progress - 60%</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Improve Public Speaking Skills</span>
+                        <span class="badge bg-success">Achieved</span>
+                    </li>
+                </ul>
+            </div>
+    
+            <!-- Action Buttons -->
+            <div class="text-center">
+                <button class="btn btn-primary me-2">Edit Review</button>
+                <button class="btn btn-secondary">Assign New Goal</button>
+            </div>
+        </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
+    

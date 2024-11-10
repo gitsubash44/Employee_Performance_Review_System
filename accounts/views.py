@@ -75,6 +75,9 @@ def user_login(request):
 def manager_dashboard(request):
     return render(request, "manager/manager_dashboard.html")
 
+def work_desc(request):
+    return render(request, "manager/work_desc.html")
+
 
 # employer
 def employer_dashboard(request):
