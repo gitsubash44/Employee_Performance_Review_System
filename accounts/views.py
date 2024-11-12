@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import CustomUser, UserTypes
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.shortcuts import get_object_or_404
 
 
 
@@ -81,8 +82,12 @@ def manager_dashboard(request):
     }
     return render(request, "manager/manager_dashboard.html", context)
 
-def work_desc(request):
-    return render(request, "manager/work_desc.html")
+def work_desc(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    context = {
+        'user': user,
+    }
+    return render(request, "manager/work_desc.html", context)
 
 
 # employer

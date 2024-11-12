@@ -49,7 +49,7 @@
                             <td>{{employee.username}}</td>
                             <td>{{employee.position}}</td>
                             <td>
-                                <a href="{% url 'work_desc' %}"><button class="btn btn-primary btn-sm">View</button></a>
+                                <a href="{% url 'work_desc' employee.id %}"button class="btn btn-primary btn-sm">View</button></a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -76,7 +76,7 @@
                             <td>{{intern.username}}</td>
                             <td>{{intern.position}}</td>
                             <td>
-                                <a href="{% url 'work_desc' %}"><button class="btn btn-primary btn-sm">View</button></a>
+                                <a href="{% url 'work_desc' intern.id %}"><button class="btn btn-primary btn-sm">View</button></a>
                             </td>
                         </tr>
                         {% endfor %}

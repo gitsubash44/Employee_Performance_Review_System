@@ -31,16 +31,16 @@
         <div class="container-fluid hero-header py-3 ">
             <div class="container py-5">
                 <h4 class="fw-bold mb-4 ">
-                    Intern/Employee Works Details.
+                    {{user.user_type | upper}} WORK DETAILS
                 </h4>
                 <div class="card overflow-hidden">
                     <div class="row g-0">
                         <div class="col-md-3">
                             <div class="list-group list-group-flush">
-                                <a class="list-group-item list-group-item-action active h5" data-bs-toggle="list" href="#account-general">Intern Work Detail</a>
-                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#perfom_review">Performance reviews</a>
-                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#performance_metrics">Performance Metrics</a>
-                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#account-notifications">Asign Goal</span>
+                                <a class="list-group-item list-group-item-action active h5" data-bs-toggle="list" href="#account-general"> {{user.user_type | upper}} INFORMATION</a>
+                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#perfom_review">PERFORMANCE REVIEW</a>
+                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#performance_metrics">PERFORMANCE METRIC</a>
+                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#account-notifications">ASSIGN GOAL</span>
                                 </a>
                             </div>
                         </div>
@@ -49,10 +49,10 @@
                         <div class="col-md-8">
                             <div class="tab-content p-3">
                                 <div class="tab-pane fade show active" id="account-general">
-                                    <h3 id="text-center py-5">Intern Information</h2>
-                                        <p><strong>Name:</strong> Subash</p>
-                                        <p><strong>Position:</strong> Python Intern</p>
-                                        <p><strong>Current Status:</strong> In Progress</p>
+                                    <h3 id="text-center py-5"> {{user.user_type | upper}} INFORMATION</h2>
+                                        <p><strong>Name:</strong> {{user.username | upper}}</p>
+                                        <p><strong>Position:</strong> {{user.position | upper}}</p>
+                                        <p><strong>Email:</strong> {{user.email | upper}}</p>
                                 
                                 </div>
                                 

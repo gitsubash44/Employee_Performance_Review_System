@@ -10,7 +10,7 @@ urlpatterns = [
 
     #manager
     path('manager_dashboard/', views.manager_dashboard, name="manager_dashboard"),
-    path('work_desc/', views.work_desc, name="work_desc"),
+    path('work_desc/<int:user_id>/', views.work_desc, name='work_desc'),
 
     # employer
     path('employer_dashboard/', views.employer_dashboard, name="employer_dashboard"),
