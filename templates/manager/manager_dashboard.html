@@ -33,46 +33,57 @@
 
         <!-- Employee Table Section -->
         <div class="card p-4 shadow mb-5">
-            <h4>Employee/Intern List</h4>
+            <h4>Employee List</h4>
             <div class="table-responsive">
                 <table class="table table-bordered mt-3">
                     <thead>
                         <tr>
                             <th>Employee Name</th>
                             <th>Position</th>
-                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for employee in employees %}
                         <tr>
-                            <td>Amulya Hero</td>
-                            <td>Software Engineer</td>
-                            <td><span class="badge bg-success">Completed</span></td>
+                            <td>{{employee.username}}</td>
+                            <td>{{employee.position}}</td>
                             <td>
                                 <a href="{% url 'work_desc' %}"><button class="btn btn-primary btn-sm">View</button></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Vaidya vai</td>
-                            <td>Marketing Intern</td>
-                            <td><span class="badge bg-warning">Pending</span></td>
-                            <td>
-                                <a href="{% url 'work_desc' %}"><button class="btn btn-primary btn-sm">View</button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jane chamling</td>
-                            <td>Marketing Intern</td>
-                            <td><span class="badge bg-danger">In process</span></td>
-                            <td>
-                                <a href="{% url 'work_desc' %}"><button class="btn btn-primary btn-sm">View</button></a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
+            
         </div>
+         <!-- Intern Table Section -->
+         <div class="card p-4 shadow mb-5">
+            <h4>Intern List</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Intern Name</th>
+                            <th>Position</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for intern in interns %}
+                        <tr>
+                            <td>{{intern.username}}</td>
+                            <td>{{intern.position}}</td>
+                            <td>
+                                <a href="{% url 'work_desc' %}"><button class="btn btn-primary btn-sm">View</button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
 
         <!-- Review Creation/Editing Form -->
        <!-- <div class="card p-4 shadow">

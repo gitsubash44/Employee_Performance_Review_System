@@ -5,11 +5,13 @@ class UserTypes(models.TextChoices):
     EMPLOYER = 'employer', 'Employer'
     MANAGER = 'manager', 'Manager'
     INTERN = 'intern', 'Intern'
+    ADMIN = 'admin', 'Admin'
     
 
 
 class CustomUser(AbstractUser):
-    user_type = models.CharField(max_length=10, choices=UserTypes.choices, default=UserTypes.INTERN)
+    user_type = models.CharField(max_length=10, choices=UserTypes.choices, default="")
+    position = models.CharField(max_length=50, default="", null=True)
 
     def __str__(self):
         return self.username
