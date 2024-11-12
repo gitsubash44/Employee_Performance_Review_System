@@ -16,12 +16,12 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('username',)
     
     # Add filtering options for user type and active status
-    list_filter = ('user_type', 'is_active')
+    list_filter = ('user_type', 'is_active', )
 
     # Customize the fields in the admin form
     fieldsets = (
         (None, {
-            'fields': ('username', 'email', 'password', 'user_type')
+            'fields': ('username', 'email', 'password', 'user_type', 'position')
         }),
         ('Permissions', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
