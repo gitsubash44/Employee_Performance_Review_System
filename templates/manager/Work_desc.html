@@ -40,7 +40,7 @@
                                 <a class="list-group-item list-group-item-action active h5" data-bs-toggle="list" href="#account-general"> {{user.user_type | upper}} INFORMATION</a>
                                 <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#perfom_review">PERFORMANCE REVIEW</a>
                                 <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#performance_metrics">PERFORMANCE METRIC</a>
-                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#account-notifications">ASSIGN GOAL</span>
+                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#assing_goal">ASSIGN GOAL</span>
                                 </a>
                             </div>
                         </div>
@@ -146,13 +146,34 @@
                                     </div>
         
                                 
-                                <!-- Order History Tab -->
-                                <div class="tab-pane fade" id="account-notifications">
-                                    <div class="container my-5">
-                                        <h2 class="text-center mb-4">Asign Goal</h2>
-                                        
+                                <!-- Assing Goal -->
+                                <div class="tab-pane fade" id="assing_goal">
+                                    <h3 class="text-center mb-4">Prfermance Reviews</h2>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Reviews</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Sample reviewa Rows -->
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>for something subject</td>
+                                                    <td>
+                                                        <a href=""> <button class="btn btn-primary btn-sm">View Details</button> </a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                        <div class="align-content-center">
+                                            <a href=""> <button class="btn btn-primary align-content-center">View All</button> </a>
+                                        </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
