@@ -39,8 +39,21 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
+
+# Customize the PerformanceReview admin
+class PerformanceReviewAdmin(admin.ModelAdmin):
+    list_display = ('user', 'user_type', 'date')
+    search_fields = ('user__username', 'goals', 'feedback', )  
+    list_filter = ('user__user_type', 'date', )
+
+    def user_type(self, obj):
+        return obj.user.user_type 
+
+    user_type.admin_order_field = 'user__user_type' 
+    user_type.short_description = 'User Type'  
+
 admin.site.register(CustomUser, CustomUserAdmin)
 
-admin.site.register(PerformanceReview)
+admin.site.register(PerformanceReview, PerformanceReviewAdmin)
 
 
