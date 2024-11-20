@@ -64,7 +64,8 @@
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col">No</th>
-                                                    <th scope="col">Reviews</th>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Date</th>
                                                     <th scope="col">Actions</th>
                                                 </tr>
                                             </thead>
@@ -72,7 +73,8 @@
                                                 {% for review in performance_reviews %}
                                                 <tr>
                                                     <td>{{ forloop.counter }}</td>
-                                                    <td>Productivity: {{ review.productivity_score }}%, Punctuality: {{ review.punctuality_score }}%, Collaboration: {{ review.collaboration_score }}%, Goals: {{ review.goals }}</td>
+                                                    <td>{{ review.user.username }}</td>
+                                                    <td>{{ review.date|date:"Y-m-d H:i" }}</td>  <!-- Display formatted date -->
                                                     <td>
                                                         <a href=""> <button class="btn btn-primary btn-sm">View Details</button> </a>
                                                     </td>
@@ -110,6 +112,19 @@
                                                     <div class="mb-3">
                                                         <label for="goal" class="form-label">Goal Achievement (%)</label>
                                                         <input type="text" id="goal" name="goal" class="form-control text-success"  max="100", min="1">
+                                                        <input type="text" id="productivity" name="productivity" class="form-control text-success" value="80">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="punctuality" class="form-label">Punctuality (%)</label>
+                                                        <input type="text" id="punctuality" name="punctuality" class="form-control text-success" value="90">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="collaboration" class="form-label">Collaboration (%)</label>
+                                                        <input type="text" id="collaboration" name="collaboration" class="form-control text-success" value="85">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="goal" class="form-label">Goal Achievement (%)</label>
+                                                        <input type="text" id="goal" name="goal" class="form-control text-success" value="75">
                                                     </div>
                                                     <div class="text-end">
                                                         <button id="submitButton" class="btn btn-primary">Save Changes</button>
