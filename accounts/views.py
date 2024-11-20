@@ -99,3 +99,6 @@ def employer_dashboard(request):
 # intern
 def intern_dashboard(request):
     return render(request, "intern/intern_dashboard.html")
+
+def goals(request):
+    return render(request, "intern/goals.html")
