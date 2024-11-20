@@ -86,74 +86,55 @@
                                     </div>
                                 </div>
             
-                            <!-- Performance Metrics Table -->
+                            <!-- Performance Metrics Form -->
                                 <div class="tab-pane fade" id="performance_metrics">
                                     <div class="container mt-5">
                                         <h3 class="text-center mb-4">Performance Metrics</h3>
-                                        <div class="table-responsive">
-                                            <div class="card p-4 shadow-sm border-1 mb-4">
-                                                <div class="card-body">
-                                                    <!-- Editable Table -->
-                                                    <div class="table-responsive mb-4">
-                                                        <form id="performanceForm" action="#" method="post">
-                                                            {% csrf_token %}
-                                                            <table class="table table-bordered">
-                                                                <thead class="table-light">
-                                                                    <tr>
-                                                                        <th>Metric</th>
-                                                                        <th>Score (%)</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Productivity</td>
-                                                                        <td contenteditable="false" class="text-success" name="productivity">80</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Punctuality</td>
-                                                                        <td contenteditable="false" class="text-success" name="punctuality">90</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Collaboration</td>
-                                                                        <td contenteditable="false" class="text-success name="collaboration">85</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Goal Achievement</td>
-                                                                        <td contenteditable="false" class="text-success name="goal">75</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <div class="text-end">
-                                                                <button id="editButton" class="btn btn-primary mb-3">Enable Edit</button>
-                                                            </div>
-                                                            <div class="text-end">
-                                                                <button id="submitButton" class="btn btn-primary">Save Changes</button>
-                                                            </div>
-                                                        </form>
-
+                                        <div class="card p-4 shadow-sm border-1 mb-4">
+                                            <div class="card-body">
+                                                <!-- Editable Form -->
+                                                <form id="performanceForm" action="#" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="mb-3">
+                                                        <label for="productivity" class="form-label">Productivity (%)</label>
+                                                        <input type="text" id="productivity" name="productivity" class="form-control text-success" value="80" readonly>
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <label for="punctuality" class="form-label">Punctuality (%)</label>
+                                                        <input type="text" id="punctuality" name="punctuality" class="form-control text-success" value="90" readonly>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="collaboration" class="form-label">Collaboration (%)</label>
+                                                        <input type="text" id="collaboration" name="collaboration" class="form-control text-success" value="85" readonly>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="goal" class="form-label">Goal Achievement (%)</label>
+                                                        <input type="text" id="goal" name="goal" class="form-control text-success" value="75" readonly>
+                                                    </div>
+                                                    <div class="text-end">
+                                                        <button id="submitButton" class="btn btn-primary">Save Changes</button>
+                                                    </div>
+                                                </form>
 
-
-                                                        
                                                 <!-- Feedback Section -->
-                                                    <div>
-                                                        <h5 class="mb-3">Feedback</h5>
-                                                        <form >
-                                                            <div class="mb-3 m-3">
-                                                                <label for="feedbackText" class="form-label">Provide Your Feedback:</label>
-                                                                <textarea class="form-control" id="feedbackText" rows="4" placeholder="Write your feedback here..."></textarea>
-                                                            </div>
-                                                            
-                                                            <div class="text-end mt-3">
-                                                                <button type="submit" class="btn btn-primary">Submit Feedback</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                                <div class="mt-4">
+                                                    <h5 class="mb-3">Feedback</h5>
+                                                    <form>
+                                                        <div class="mb-3 m-3">
+                                                            <label for="feedbackText" class="form-label">Provide Your Feedback:</label>
+                                                            <textarea class="form-control" id="feedbackText" rows="4" placeholder="Write your feedback here..."></textarea>
+                                                        </div>
+                                                        <div class="text-end mt-3">
+                                                            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                            </div>
         
                                 
                                 <!-- Order History Tab -->
