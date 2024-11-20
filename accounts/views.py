@@ -84,6 +84,7 @@ def manager_dashboard(request):
 
 def work_desc(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
+    
     context = {
         'user': user,
     }
