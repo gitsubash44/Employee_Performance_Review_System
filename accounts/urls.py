@@ -18,5 +18,9 @@ urlpatterns = [
     # Intern
     path('intern_dashboard/', views.intern_dashboard, name="intern_dashboard"),
     path('goals/', views.goals, name="goals"),
+    
+    # Employees 
+    path('employee_dashboard/', views.employee_dashboard, name="employee_dashboard"),
+    
 
 ]
