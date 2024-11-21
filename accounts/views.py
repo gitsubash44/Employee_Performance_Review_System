@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import CustomUser, UserTypes
+from .models import CustomUser, UserTypes, PerformanceReview
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
@@ -84,9 +84,35 @@ def manager_dashboard(request):
 
 def work_desc(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
-    
+    # Fetching all performance reviews for the user
+    performance_reviews = PerformanceReview.objects.filter(user=user)
+
+    if request.method =="POST":
+        productivity_score = request.POST.get("productivity")
+        punctuality_score = request.POST.get("punctuality")
+        collaboration_score = request.POST.get("collaboration")
+        goals = request.POST.get("goal")
+
+        try:
+            performance_metrics = PerformanceReview.objects.create(
+                user = user,
+                productivity_score = productivity_score,
+                punctuality_score = punctuality_score,
+                collaboration_score = collaboration_score,
+                goals = goals,
+            )
+            performance_metrics.save()
+            messages.success(request, "Performance review saved successfully.")
+        except ValueError as e:
+            messages.error(request, f"Invalid input: {e}")
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+        return redirect("work_desc", user_id=user.id)
+
+
     context = {
         'user': user,
+        'performance_reviews': performance_reviews,
     }
     return render(request, "manager/work_desc.html", context)
 

@@ -58,25 +58,28 @@
                                 
                                 <!-- Change Performance Tab -->
                                 <div class="tab-pane fade" id="perfom_review">
-                                    <h3 class="text-center mb-4">Prfermance Reviews</h2>
+                                    <h3 class="text-center mb-4">Performance Reviews</h2>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col">No</th>
-                                                    <th scope="col">Reviews</th>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Date</th>
                                                     <th scope="col">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- Sample reviewa Rows -->
+                                                {% for review in performance_reviews %}
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>for something subject</td>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ review.user.username }}</td>
+                                                    <td>{{ review.date|date:"Y-m-d H:i" }}</td>  <!-- Display formatted date -->
                                                     <td>
                                                         <a href=""> <button class="btn btn-primary btn-sm">View Details</button> </a>
                                                     </td>
                                                 </tr>
+                                                {% endfor %}
                                                 
                                             </tbody>
                                         </table>
@@ -92,11 +95,23 @@
                                         <h3 class="text-center mb-4">Performance Metrics</h3>
                                         <div class="card p-4 shadow-sm border-1 mb-4">
                                             <div class="card-body">
-                                                <!-- Editable Form -->
-                                                <form id="performanceForm" action="#" method="post">
+                                                <form id="performanceForm" action="{% url 'work_desc' user.id %}" method="post">
                                                     {% csrf_token %}
                                                     <div class="mb-3">
                                                         <label for="productivity" class="form-label">Productivity (%)</label>
+                                                        <input type="text" id="productivity" name="productivity" class="form-control text-success" max="100", min="1">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="punctuality" class="form-label">Punctuality (%)</label>
+                                                        <input type="text" id="punctuality" name="punctuality" class="form-control text-success" max="100", min="1">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="collaboration" class="form-label">Collaboration (%)</label>
+                                                        <input type="text" id="collaboration" name="collaboration" class="form-control text-success"max="100", min="1">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="goal" class="form-label">Goal Achievement (%)</label>
+                                                        <input type="text" id="goal" name="goal" class="form-control text-success"  max="100", min="1">
                                                         <input type="text" id="productivity" name="productivity" class="form-control text-success" value="80">
                                                     </div>
                                                     <div class="mb-3">
@@ -115,6 +130,7 @@
                                                         <button id="submitButton" class="btn btn-primary">Save Changes</button>
                                                     </div>
                                                 </form>
+                                                
 
                                                 <!-- Feedback Section -->
                                                 <div class="mt-4">
@@ -154,7 +170,7 @@
     
     <!-- End user profile -->
 
-    <script>
+    {% comment %} <script>
         // JavaScript for toggling edit mode
         const editButton = document.getElementById('editButton');
         const cells = document.querySelectorAll('td[contenteditable]');
@@ -166,7 +182,7 @@
             editButton.classList.toggle('btn-danger', !isEditable);
             editButton.classList.toggle('btn-primary', isEditable);
         });
-    </script>
+    </script> {% endcomment %}
     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
