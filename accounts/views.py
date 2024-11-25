@@ -49,7 +49,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            print(user.user_type)  # Check what user type is being returned
+            print(user.user_type)
 
             login(request, user)
             # Redirect based on user type
@@ -92,6 +92,7 @@ def work_desc(request, user_id):
         punctuality_score = request.POST.get("punctuality")
         collaboration_score = request.POST.get("collaboration")
         goals = request.POST.get("goal")
+        feedback = request.POST.get("feedbackText")
 
         try:
             performance_metrics = PerformanceReview.objects.create(
@@ -100,6 +101,7 @@ def work_desc(request, user_id):
                 punctuality_score = punctuality_score,
                 collaboration_score = collaboration_score,
                 goals = goals,
+                feedback = feedback,
             )
             performance_metrics.save()
             messages.success(request, "Performance review saved successfully.")
@@ -116,11 +118,14 @@ def work_desc(request, user_id):
     }
     return render(request, "manager/work_desc.html", context)
 
+# View performance details
+
+def performance_details(request):
+    return render(request, "manager/performance_details.html")
 
 # employer
 def employer_dashboard(request):
     return render(request, "employer/employer_dashboard.html")
-
 
 
 # intern
@@ -129,7 +134,6 @@ def intern_dashboard(request):
 
 def goals(request):
     return render(request, "intern/goals.html")
-
 
 
 # intern
