@@ -13,37 +13,37 @@
         <h2 class="text-center mb-4">Performance Metrics</h2>
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
-                <h4>Details for: <span id="user-name">John Doe</span></h4>
+                <h4>Details for: <span id="user-name">{{ review.user.username }}</span></h4>
             </div>
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <p><strong>Productivity Score:</strong> <span id="productivity-score">80</span></p>
+                        <p><strong>Productivity Score:</strong> <span id="productivity-score">{{ review.productivity_score }}</span></p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Punctuality Score:</strong> <span id="punctuality-score">90</span></p>
+                        <p><strong>Punctuality Score:</strong> <span id="punctuality-score">{{ review.punctuality_score }}</span></p>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <p><strong>Collaboration Score:</strong> <span id="collaboration-score">88</span></p>
+                        <p><strong>Collaboration Score:</strong> <span id="collaboration-score">{{ review.collaboration_score }}</span></p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Goals:</strong> <span id="goals">Complete project milestone 1</span></p>
+                        <p><strong>Goal Achivement:</strong> <span id="goals">{{ review.goals }}</span></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <p><strong>Feedback:</strong></p>
                         <p id="feedback" class="text-muted">
-                            Great performance overall, but needs to improve on meeting deadlines consistently.
+                            {{ review.feedback }}                        
                         </p>
                     </div>
                 </div>
             </div>
             <div class="card-footer text-end">
                 <a href="/performance/edit" class="btn btn-warning">Edit</a>
-                <a href="/performance/list" class="btn btn-secondary">Back to List</a>
+                <a href="{% url 'work_desc' review.user.id %}" class="btn btn-secondary">Back to List</a>
             </div>
         </div>
     </div>

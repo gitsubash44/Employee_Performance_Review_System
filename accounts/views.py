@@ -85,7 +85,7 @@ def manager_dashboard(request):
 def work_desc(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
     # Fetching all performance reviews for the user
-    performance_reviews = PerformanceReview.objects.filter(user=user)
+    performance_reviews = PerformanceReview.objects.filter(user=user).order_by("-id")[:3]
 
     if request.method =="POST":
         productivity_score = request.POST.get("productivity")
@@ -119,9 +119,26 @@ def work_desc(request, user_id):
     return render(request, "manager/work_desc.html", context)
 
 # View performance details
+def performance_details(request, review_id):
+    review = get_object_or_404(PerformanceReview, id=review_id)
 
-def performance_details(request):
-    return render(request, "manager/performance_details.html")
+
+    data = {
+        'review': review,
+    }
+
+    return render(request, "manager/performance_details.html", data)
+
+# for viewing all review
+def allReview(request, user_id):
+    allReviews = PerformanceReview.objects.filter(user_id=user_id).order_by("-id")
+
+    data={
+        'allReviews': allReviews,
+    }
+
+    return render(request, "manager/allReview.html", data)
+
 
 # employer
 def employer_dashboard(request):

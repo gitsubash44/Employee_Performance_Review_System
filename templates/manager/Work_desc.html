@@ -76,7 +76,8 @@
                                                     <td>{{ review.user.username }}</td>
                                                     <td>{{ review.date|date:"Y-m-d H:i" }}</td>  <!-- Display formatted date -->
                                                     <td>
-                                                        <a href="{% url 'performance_details' %}"> <button class="btn btn-primary btn-sm">View Details</button> </a>
+                                                        <a href="{% url 'performance_details' review.id %}"> 
+                                                        <button class="btn btn-primary btn-sm">View Details</button> </a>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
@@ -84,7 +85,8 @@
                                             </tbody>
                                         </table>
                                         <div class="align-content-center">
-                                            <a href=""> <button class="btn btn-primary align-content-center">View All</button> </a>
+                                            <a href="{% url 'all_reviews' user.id %}">
+                                            <button class="btn btn-primary align-content-center">View All</button> </a>
                                         </div>
                                     </div>
                                 </div>
