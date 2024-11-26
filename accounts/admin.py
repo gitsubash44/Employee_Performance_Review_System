@@ -57,3 +57,6 @@ admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(PerformanceReview, PerformanceReviewAdmin)
 
 
+# Customize the Assign goals
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ('description', 'status', 'progress')

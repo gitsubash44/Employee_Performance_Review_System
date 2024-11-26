@@ -30,3 +30,18 @@ class PerformanceReview(models.Model):
 
     def __str__(self):
         return f"Review for {self.user.username} on {self.date}"
+    
+    
+#assign Goals
+class Goal(models.Model):
+    STATUS_CHOICES = [
+        ('in_progress', 'In Progress'),
+        ('achieved', 'Achieved'),
+    ]
+
+    description = models.CharField()
+    status = models.CharField(choices=STATUS_CHOICES, default='in_progress')
+    progress = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.description
