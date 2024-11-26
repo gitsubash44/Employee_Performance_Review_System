@@ -79,6 +79,8 @@ def manager_dashboard(request):
     context = {
         'employees': employees,
         'interns': interns,
+        'current_user_type': request.user.user_type,  # The logged-in user's type
+
     }
     return render(request, "manager/manager_dashboard.html", context)
 
@@ -115,6 +117,8 @@ def work_desc(request, user_id):
     context = {
         'user': user,
         'performance_reviews': performance_reviews,
+        'current_user_type': request.user.user_type,  # The logged-in user's type
+
     }
     return render(request, "manager/work_desc.html", context)
 
@@ -125,6 +129,8 @@ def performance_details(request, review_id):
 
     data = {
         'review': review,
+        'current_user_type': request.user.user_type,  # The logged-in user's type
+
     }
 
     return render(request, "manager/performance_details.html", data)
@@ -135,6 +141,8 @@ def allReview(request, user_id):
 
     data={
         'allReviews': allReviews,
+        'current_user_type': request.user.user_type,  # The logged-in user's type
+
     }
 
     return render(request, "manager/allReview.html", data)
