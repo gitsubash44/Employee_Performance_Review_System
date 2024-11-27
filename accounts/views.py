@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import CustomUser, UserTypes, PerformanceReview
+from .models import CustomUser, UserTypes, PerformanceReview, Goal
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
+
 
 
 
@@ -141,11 +142,22 @@ def allReview(request, user_id):
 
     data={
         'allReviews': allReviews,
-        'current_user_type': request.user.user_type,  # The logged-in user's type
-
+        'current_user_type': request.user.user_type,  
     }
-
     return render(request, "manager/allReview.html", data)
+
+# For Assing Goals
+def assign_goal(request):
+    if request.method == 'POST':
+        description = request.POST.get('description')
+        if description.strip():  # Ensure the description is not empty or just whitespace
+            Goal.objects.create(description=description, status='in_progress', progress=0)
+            messages.success(request, "Goal assigned successfully!")
+        else:
+            messages.error(request, "Goal description cannot be empty!")
+        return redirect('assign_goal')  # Ensure this URL pattern is defined
+    goals = Goal.objects.all()  # Fetch all goals to display
+    return render(request, 'manager/Work_desc.html', {'goals': goals})
 
 
 # employer

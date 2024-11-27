@@ -59,4 +59,14 @@ admin.site.register(PerformanceReview, PerformanceReviewAdmin)
 
 # Customize the Assign goals
 class GoalAdmin(admin.ModelAdmin):
+    # Fields to display in the list view
     list_display = ('description', 'status', 'progress')
+    # Fields to filter by in the sidebar
+    list_filter = ('status',)
+    # Fields to search for in the search bar
+    search_fields = ('description',)
+    # Fields to edit directly in the list view
+    list_editable = ('status', 'progress')
+
+# Register the Goal model with the admin site
+admin.site.register(Goal, GoalAdmin)

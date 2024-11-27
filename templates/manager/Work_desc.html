@@ -108,24 +108,29 @@
                                 <!-- Order History Tab -->
                                 <div class="tab-pane fade" id="account-notifications">
                                     <div class="container my-5">
-                                    
-                                    <div class="card-body">
-
-                                        <h2 class=" text-center mb-4">Asign Goal</h2>
-                                        <form>
-                                            <div class="mb-3 m-3">
-                                                <label for="feedbackText" class="form-label">Assign Goals</label>
-                                                <textarea class="form-control" id="feedbackText" rows="4" placeholder="Write Goals here..."></textarea>
-                                            </div>
-                                            <div class="text-end mt-3">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </form>
+                                        <div class="card-body">
+                                            <h2 class="text-center mb-4">Assign Goal</h2>
+                                            <form method="POST" action="{% url 'assign_goal' %}">
+                                                {% csrf_token %}
+                                                <div class="mb-3">
+                                                    <label for="goalDescription" class="form-label">Assign Goal</label>
+                                                    <textarea
+                                                        class="form-control"
+                                                        id="goalDescription"
+                                                        name="description"
+                                                        rows="3"
+                                                        placeholder="Write goals here..."
+                                                    ></textarea>
+                                                </div>
+                                                <div class="text-end mt-3">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
+                                            
+                                        </div>
                                     </div>
-                                    
-                                    </div>
-                                    
                                 </div>
+                                
                             </div>
                         </div>
                         </div>
