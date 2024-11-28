@@ -5,9 +5,6 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
 
 
-
-
-
 # Create your views here.
 def user_register(request):
     if request.method == "POST":
@@ -74,16 +71,34 @@ def user_login(request):
 
 
 # manager 
+# def manager_dashboard(request):
+#     employees = CustomUser.objects.filter(user_type=UserTypes.EMPLOYER)
+#     interns = CustomUser.objects.filter(user_type=UserTypes.INTERN)
+#     context = {
+#         'employees': employees,
+#         'interns': interns,
+#         'current_user_type': request.user.user_type,  # The logged-in user's type
+
+#     }
+#     return render(request, "manager/manager_dashboard.html", context)
+
 def manager_dashboard(request):
     employees = CustomUser.objects.filter(user_type=UserTypes.EMPLOYER)
     interns = CustomUser.objects.filter(user_type=UserTypes.INTERN)
+
+    
+    # Debugging: Print employee details
+    for employee in employees:
+        print(f"Username: {employee.username}, Position: {employee.position}")
+    
     context = {
         'employees': employees,
         'interns': interns,
-        'current_user_type': request.user.user_type,  # The logged-in user's type
-
+        'current_user_type': request.user.user_type,
     }
     return render(request, "manager/manager_dashboard.html", context)
+
+
 
 def work_desc(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)

@@ -11,7 +11,7 @@ class UserTypes(models.TextChoices):
 
 class CustomUser(AbstractUser):
     user_type = models.CharField(max_length=10, choices=UserTypes.choices, default="")
-    position = models.CharField(max_length=50, default="", null=True)
+    position = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.username

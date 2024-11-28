@@ -21,7 +21,7 @@
                         {% for employee in employees %}
                         <tr>
                             <td>{{employee.username}}</td>
-                            <td>{{employee.position}}</td>
+                            <td>{{ employee.user_type }}</td>
                             <td>
                                 <a href="{% url 'work_desc' employee.id %}"button class="btn btn-primary btn-sm">View</button></a>
                             </td>
@@ -48,7 +48,7 @@
                         {% for intern in interns %}
                         <tr>
                             <td>{{intern.username}}</td>
-                            <td>{{intern.position}}</td>
+                            <td>{{intern.user_type}}</td>
                             <td>
                                 <a href="{% url 'work_desc' intern.id %}"><button class="btn btn-primary btn-sm">View</button></a>
                             </td>
