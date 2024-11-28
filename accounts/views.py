@@ -52,7 +52,7 @@ def user_login(request):
             login(request, user)
             # Redirect based on user type
             if user.user_type == UserTypes.EMPLOYER:
-                return redirect('employer_dashboard')  
+                return redirect('employee_dashboard')  
             elif user.user_type == UserTypes.MANAGER:
                 return redirect('manager_dashboard')   
             elif user.user_type == UserTypes.INTERN:
@@ -71,34 +71,15 @@ def user_login(request):
 
 
 # manager 
-# def manager_dashboard(request):
-#     employees = CustomUser.objects.filter(user_type=UserTypes.EMPLOYER)
-#     interns = CustomUser.objects.filter(user_type=UserTypes.INTERN)
-#     context = {
-#         'employees': employees,
-#         'interns': interns,
-#         'current_user_type': request.user.user_type,  # The logged-in user's type
-
-#     }
-#     return render(request, "manager/manager_dashboard.html", context)
-
 def manager_dashboard(request):
     employees = CustomUser.objects.filter(user_type=UserTypes.EMPLOYER)
     interns = CustomUser.objects.filter(user_type=UserTypes.INTERN)
-
-    
-    # Debugging: Print employee details
-    for employee in employees:
-        print(f"Username: {employee.username}, Position: {employee.position}")
-    
     context = {
         'employees': employees,
         'interns': interns,
-        'current_user_type': request.user.user_type,
+
     }
     return render(request, "manager/manager_dashboard.html", context)
-
-
 
 def work_desc(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
@@ -133,7 +114,6 @@ def work_desc(request, user_id):
     context = {
         'user': user,
         'performance_reviews': performance_reviews,
-        'current_user_type': request.user.user_type,  # The logged-in user's type
 
     }
     return render(request, "manager/work_desc.html", context)
@@ -145,7 +125,6 @@ def performance_details(request, review_id):
 
     data = {
         'review': review,
-        'current_user_type': request.user.user_type,  # The logged-in user's type
 
     }
 
@@ -157,7 +136,6 @@ def allReview(request, user_id):
 
     data={
         'allReviews': allReviews,
-        'current_user_type': request.user.user_type,  
     }
     return render(request, "manager/allReview.html", data)
 
@@ -175,6 +153,9 @@ def assign_goal(request):
     return render(request, 'manager/Work_desc.html', {'goals': goals})
 
 
+
+
+
 # employer
 def employer_dashboard(request):
     return render(request, "employer/employer_dashboard.html")
@@ -185,7 +166,12 @@ def intern_dashboard(request):
     return render(request, "intern/intern_dashboard.html")
 
 def goals(request):
-    return render(request, "intern/goals.html")
+    # Query all goals from the database
+    goals = Goal.objects.all()
+    context = {
+        'goals': Goal
+    }
+    return render(request, "intern/goals.html", context)
 
 
 # intern
