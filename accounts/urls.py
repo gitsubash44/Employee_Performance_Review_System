@@ -13,7 +13,8 @@ urlpatterns = [
     path('work_desc/<int:user_id>/', views.work_desc, name='work_desc'),
     path('performance_details/<int:review_id>/', views.performance_details, name='performance_details'),
     path('reviews/<int:user_id>', views.allReview, name='all_reviews'),
-    path('assign-goal/', views.assign_goal, name='assign_goal'),
+    path('assign_goal/', views.assign_goal, name='assign_goal'),
+    path('UpCommingReview/', views.UpCommingReview, name='UpCommingReview'),
 
     
 
