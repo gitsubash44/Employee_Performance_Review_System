@@ -72,11 +72,14 @@ def user_login(request):
 
 # manager 
 def manager_dashboard(request):
+
     employees = CustomUser.objects.filter(user_type=UserTypes.EMPLOYER)
     interns = CustomUser.objects.filter(user_type=UserTypes.INTERN)
+    # print(request.user.user_type)
     context = {
         'employees': employees,
         'interns': interns,
+        'user': request.user
 
     }
     return render(request, "manager/manager_dashboard.html", context)
