@@ -1,186 +1,4 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin/Manager Review Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-            {% if user.is_authenticated %}
-                {{ current_user_type | upper}} PORTAL 
-            {% endif %}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">                                
-                    <li class="nav-item"><a class="nav-link " href="#">Review Panel</a></li>
-                    <li class="nav-item"><a class="nav-link text-danger" href="#">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-
-
-    </nav>
-<!--Back arrow-->
-    <div class="container mt-4">
-        <a href="{% url 'manager_dashboard' %}" class="btn btn-outline-primary">
-            <i class="fas fa-arrow-left" style="font-size: 1.5rem;"></i>
-        </a>
-    </div>
-    
-        <!-- Page Content -->
-        <div class="container-fluid hero-header py-3 ">
-            <div class="container py-5">
-                <h4 class="fw-bold mb-4 ">
-                    {{user.user_type | upper}} WORK DETAILS
-                </h4>
-                <div class="card overflow-hidden">
-                    <div class="row g-0">
-                        <div class="col-md-3">
-                            <div class="list-group list-group-flush">
-                                <a class="list-group-item list-group-item-action active h5" data-bs-toggle="list" href="#account-general"> {{user.user_type | upper}} INFORMATION</a>
-                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#perfom_review">PERFORMANCE REVIEW</a>
-                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#performance_metrics">PERFORMANCE METRIC</a>
-                                <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#account-notifications">ASSIGN GOAL</span>
-                                </a>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="col-md-8">
-                            <div class="tab-content p-3">
-                                <div class="tab-pane fade show active" id="account-general">
-                                    <h3 id="text-center py-5"> {{user.user_type | upper}} INFORMATION</h2>
-                                        <p><strong>Name:</strong> {{user.username | upper}}</p>
-                                        <p><strong>Position:</strong> {{user.user_type | upper}}</p>
-                                        <p><strong>Email:</strong> {{user.email | upper}}</p>
-                                
-                                </div>
-                                
-                                <!-- Change Performance Tab -->
-                                <div class="tab-pane fade" id="perfom_review">
-                                    <h3 class="text-center mb-4">Performance Reviews</h2>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-hover">
-                                            <thead class="table-dark">
-                                                <tr>
-                                                    <th scope="col">No</th>
-                                                    <th scope="col">User</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for review in performance_reviews %}
-                                                <tr>
-                                                    <td>{{ forloop.counter }}</td>
-                                                    <td>{{ review.user.username }}</td>
-                                                    <td>{{ review.date|date:"Y-m-d H:i" }}</td>  <!-- Display formatted date -->
-                                                    <td>
-                                                        <a href="{% url 'performance_details' review.id %}"> 
-                                                        <button class="btn btn-primary btn-sm">View Details</button> </a>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
-                                                
-                                            </tbody>
-                                        </table>
-                                        <div class="align-content-center">
-                                            <a href="{% url 'all_reviews' user.id %}">
-                                            <button class="btn btn-primary align-content-center">View All</button> </a>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                            <!-- Performance Metrics Form -->
-                                <div class="tab-pane fade" id="performance_metrics">
-                                    <div class="container mt-5">
-                                        <h3 class="text-center mb-4">Performance Metrics</h3>
-                                        <div class="card p-4 shadow-sm border-1 mb-4">
-                                            <div class="card-body">
-                                                <form id="performanceForm" action="{% url 'work_desc' user.id %}" method="post">
-                                                    {% csrf_token %}
-                                                    <div class="mb-3">
-                                                        <label for="productivity" class="form-label">Productivity (%)</label>
-                                                        <input type="text" id="productivity" name="productivity" class="form-control text-success" max="100", min="1">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="punctuality" class="form-label">Punctuality (%)</label>
-                                                        <input type="text" id="punctuality" name="punctuality" class="form-control text-success" max="100", min="1">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="collaboration" class="form-label">Collaboration (%)</label>
-                                                        <input type="text" id="collaboration" name="collaboration" class="form-control text-success"max="100", min="1">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="goal" class="form-label">Goal Achievement (%)</label>
-                                                        <input type="text" id="goal" name="goal" class="form-control text-success"  max="100", min="1">
-                                                    </div>
-                                                        <div class="mb-3 m-3">
-                                                            <label for="feedbackText" class="form-label">Provide Your Feedback:</label>
-                                                            <textarea class="form-control" name="feedbackText" id="feedbackText" rows="4" placeholder="Write your feedback here..."></textarea>
-                                                        </div>
-                                                        <div class="text-end mt-3">
-                                                            <button type="submit"  id="submitButton" class="btn btn-primary">Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                
-                                <!-- Order History Tab -->
-                                <div class="tab-pane fade" id="account-notifications">
-                                    <div class="container my-5">
-                                        <div class="card-body">
-                                            <h2 class="text-center mb-4">Assign Goal</h2>
-                                            <form method="POST" action="{% url 'assign_goal' %}">
-                                                {% csrf_token %}
-                                                <div class="mb-3">
-                                                    <label for="goalDescription" class="form-label">Assign Goal</label>
-                                                    <textarea
-                                                        class="form-control"
-                                                        id="goalDescription"
-                                                        name="description"
-                                                        rows="3"
-                                                        placeholder="Write goals here..."
-                                                    ></textarea>
-                                                </div>
-                                                <div class="text-end mt-3">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </form>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
-=======
 {% extends 'extend/base.html' %}
 {% load static %}
 {% block content %}
@@ -199,7 +17,6 @@
               <a class="list-group-item list-group-item-action h5" data-bs-toggle="list" href="#review-scheduling">REVIEWS SCHEDULING</a>
             </div>
           </div>
->>>>>>> ebb1f00ba0edfcf58f57aa053e63f2541c729ead
 
           <!-- Content Section -->
           <div class="col-md-8">
@@ -289,53 +106,56 @@
                   </form>
                 </div>
               </div>
+<!-- Reviews Scheduling Tab -->
+<div class="tab-pane fade" id="review-scheduling">
+  <h3 class="text-center mb-4">Review Scheduling</h3>
+  <div class="card p-4 shadow-sm border-1 mb-4">
+      <form method="POST" action="{% url 'work_desc' user.id %}" id="scheduleReviewForm">
+          {% csrf_token %}
+          <div class="mb-3">
+              <label for="reviewTitle" class="form-label">Review Title</label>
+              <input type="text" class="form-control" name="reviewTitle" id="reviewTitle" placeholder="Enter review title" required />
+          </div>
+          <div class="mb-3">
+              <label for="reviewDate" class="form-label">Review Date</label>
+              <input type="date" class="form-control" name="reviewDate" id="reviewDate" required />
+          </div>
+          <div class="mb-3">
+              <label for="reviewTime" class="form-label">Review Time</label>
+              <input type="time" class="form-control" name="reviewTime" id="reviewTime" required />
+          </div>
+          <button type="submit" name="scheduleReview" class="btn btn-primary">Schedule Review</button>
+      </form>
+  </div>
 
-              <!-- Reviews Scheduling Tab -->
-              <div class="tab-pane fade" id="review-scheduling">
-                <h3 class="text-center mb-4">Review Scheduling</h3>
-                <div class="card p-4 shadow-sm border-1 mb-4">
-                  <form id="scheduleReviewForm">
-                    <div class="mb-3">
-                      <label for="reviewTitle" class="form-label">Review Title</label>
-                      <input type="text" class="form-control" id="reviewTitle" placeholder="Enter review title" required />
-                    </div>
-                    <div class="mb-3">
-                      <label for="reviewDate" class="form-label">Review Date</label>
-                      <input type="date" class="form-control" id="reviewDate" required />
-                    </div>
-                    <div class="mb-3">
-                      <label for="reviewTime" class="form-label">Review Time</label>
-                      <input type="time" class="form-control" id="reviewTime" required />
-                    </div>
-                    <div class="mb-3">
-                      <label for="reviewParticipants" class="form-label">Participants</label>
-                      <input type="text" class="form-control" id="reviewParticipants" placeholder="Enter participant names" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Schedule Review</button>
-                  </form>
-                </div>
-                <!-- Upcoming Reviews Table -->
-                <div class="card">
-                  <div class="card-header bg-secondary text-white">Upcoming Reviews</div>
-                  <div class="card-body">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Review Title</th>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>Participants</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="upcomingReviews">
-                        <!-- Rows will be dynamically added here -->
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+  <!-- Upcoming Reviews Table -->
+  <div class="card">
+      <div class="card-header bg-secondary text-white">Upcoming Reviews</div>
+      <div class="card-body">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Review Title</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for review in upcoming_reviews %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ review.review_title }}</td>
+                          <td>{{ review.review_date }}</td>
+                          <td>{{ review.review_time }}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
             </div>
           </div>
         </div>

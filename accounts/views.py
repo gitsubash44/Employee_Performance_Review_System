@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import CustomUser, UserTypes, PerformanceReview, Goal
+from .models import CustomUser, UserTypes, PerformanceReview, Goal, ReviewScheduling
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
+from datetime import datetime
+
 
 
 # Create your views here.
@@ -88,6 +90,7 @@ def work_desc(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
     # Fetching all performance reviews for the user
     performance_reviews = PerformanceReview.objects.filter(user=user).order_by("-id")[:3]
+    upcoming_reviews = ReviewScheduling.objects.filter(user=user).order_by("-id")[:3]
 
     if request.method =="POST":
         productivity_score = request.POST.get("productivity")
@@ -95,6 +98,7 @@ def work_desc(request, user_id):
         collaboration_score = request.POST.get("collaboration")
         goals = request.POST.get("goal")
         feedback = request.POST.get("feedbackText")
+
 
         try:
             performance_metrics = PerformanceReview.objects.create(
@@ -112,11 +116,32 @@ def work_desc(request, user_id):
         except Exception as e:
             messages.error(request, f"An error occurred: {e}")
         return redirect("work_desc", user_id=user.id)
+    
+# Handle Review Scheduling Form submission
+    if "scheduleReview" in request.POST:  # Check if this is the review scheduling form
+        review_title = request.POST.get("reviewTitle")
+        review_date = request.POST.get("reviewDate")
+        review_time = request.POST.get("reviewTime")
+
+        try:
+            upcoming_review = ReviewScheduling.objects.create(
+                user=user,
+                review_title=review_title,
+                review_date=datetime.strptime(review_date, "%Y-%m-%d").date(),
+                review_time=datetime.strptime(review_time, "%H:%M").time()
+            )
+            upcoming_review.save()
+            messages.success(request, "Review scheduled successfully.")
+        except Exception as e:
+            messages.error(request, f"Error in scheduling review: {e}")
+
+        return redirect("work_desc", user_id=user.id)
 
 
     context = {
         'user': user,
         'performance_reviews': performance_reviews,
+        'upcoming_reviews': upcoming_reviews,
 
     }
     return render(request, "manager/work_desc.html", context)

@@ -70,3 +70,5 @@ class GoalAdmin(admin.ModelAdmin):
 
 # Register the Goal model with the admin site
 admin.site.register(Goal, GoalAdmin)
+
+admin.site.register(ReviewScheduling)
