@@ -155,6 +155,9 @@ def assign_goal(request):
     goals = Goal.objects.all()  # Fetch all goals to display
     return render(request, 'manager/Work_desc.html', {'goals': goals})
 
+def UpCommingReview(request):
+    return render(request, "manager/UpCommingReview.html")
+
 
 
 
