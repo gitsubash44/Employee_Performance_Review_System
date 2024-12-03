@@ -45,3 +45,13 @@ class Goal(models.Model):
 
     def __str__(self):
         return self.description
+    
+
+class ReviewScheduling(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    review_title = models.CharField(max_length=100)
+    review_date = models.DateField()
+    review_time = models.TimeField()
+
+    def __str__(self):
+        return f"{self.review_title} - {self.review_date.strftime('%Y-%m-%d')} at {self.review_time.strftime('%H:%M')}"

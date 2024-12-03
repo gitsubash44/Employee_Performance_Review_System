@@ -1,3 +1,4 @@
+
 {% extends 'extend/base.html' %}
 {% load static %}
 {% block content %}
@@ -105,53 +106,56 @@
                   </form>
                 </div>
               </div>
+<!-- Reviews Scheduling Tab -->
+<div class="tab-pane fade" id="review-scheduling">
+  <h3 class="text-center mb-4">Review Scheduling</h3>
+  <div class="card p-4 shadow-sm border-1 mb-4">
+      <form method="POST" action="{% url 'work_desc' user.id %}" id="scheduleReviewForm">
+          {% csrf_token %}
+          <div class="mb-3">
+              <label for="reviewTitle" class="form-label">Review Title</label>
+              <input type="text" class="form-control" name="reviewTitle" id="reviewTitle" placeholder="Enter review title" required />
+          </div>
+          <div class="mb-3">
+              <label for="reviewDate" class="form-label">Review Date</label>
+              <input type="date" class="form-control" name="reviewDate" id="reviewDate" required />
+          </div>
+          <div class="mb-3">
+              <label for="reviewTime" class="form-label">Review Time</label>
+              <input type="time" class="form-control" name="reviewTime" id="reviewTime" required />
+          </div>
+          <button type="submit" name="scheduleReview" class="btn btn-primary">Schedule Review</button>
+      </form>
+  </div>
 
-              <!-- Reviews Scheduling Tab -->
-              <div class="tab-pane fade" id="review-scheduling">
-                <h3 class="text-center mb-4">Review Scheduling</h3>
-                <div class="card p-4 shadow-sm border-1 mb-4">
-                  <form id="scheduleReviewForm">
-                    <div class="mb-3">
-                      <label for="reviewTitle" class="form-label">Review Title</label>
-                      <input type="text" class="form-control" id="reviewTitle" placeholder="Enter review title" required />
-                    </div>
-                    <div class="mb-3">
-                      <label for="reviewDate" class="form-label">Review Date</label>
-                      <input type="date" class="form-control" id="reviewDate" required />
-                    </div>
-                    <div class="mb-3">
-                      <label for="reviewTime" class="form-label">Review Time</label>
-                      <input type="time" class="form-control" id="reviewTime" required />
-                    </div>
-                    <div class="mb-3">
-                      <label for="reviewParticipants" class="form-label">Participants</label>
-                      <input type="text" class="form-control" id="reviewParticipants" placeholder="Enter participant names" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Schedule Review</button>
-                  </form>
-                </div>
-                <!-- Upcoming Reviews Table -->
-                <div class="card">
-                  <div class="card-header bg-secondary text-white">Upcoming Reviews</div>
-                  <div class="card-body">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Review Title</th>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>Participants</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody id="upcomingReviews">
-                        <!-- Rows will be dynamically added here -->
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+  <!-- Upcoming Reviews Table -->
+  <div class="card">
+      <div class="card-header bg-secondary text-white">Upcoming Reviews</div>
+      <div class="card-body">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Review Title</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for review in upcoming_reviews %}
+                      <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ review.review_title }}</td>
+                          <td>{{ review.review_date }}</td>
+                          <td>{{ review.review_time }}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
             </div>
           </div>
         </div>
