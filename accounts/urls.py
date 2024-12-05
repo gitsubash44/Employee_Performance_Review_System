@@ -22,7 +22,7 @@ urlpatterns = [
     path('employer_dashboard/', views.employer_dashboard, name="employer_dashboard"),
 
     # Intern
-    path('intern_dashboard/', views.intern_dashboard, name="intern_dashboard"),
+    path('intern_dashboard/<int:user_id>/', views.intern_dashboard, name="intern_dashboard"),
     path('goals/', views.goals, name="goals"),
     path('Self_Assessment/', views.Self_Assessment, name="Self_Assessment"),
     

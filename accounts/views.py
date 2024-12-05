@@ -58,7 +58,7 @@ def user_login(request):
             elif user.user_type == UserTypes.MANAGER:
                 return redirect('manager_dashboard')   
             elif user.user_type == UserTypes.INTERN:
-                return redirect('intern_dashboard')    
+                return redirect('intern_dashboard', user_id=user.id)    
             else:
                 return redirect('homepage')
         else: 
@@ -149,10 +149,13 @@ def work_desc(request, user_id):
 # View performance details
 def performance_details(request, review_id):
     review = get_object_or_404(PerformanceReview, id=review_id)
+    user = review.user  # The user associated with the review
+
 
 
     data = {
         'review': review,
+        'user': user,
 
     }
 
@@ -193,8 +196,16 @@ def employer_dashboard(request):
 
 
 # intern
-def intern_dashboard(request):
-    return render(request, "intern/intern_dashboard.html")
+def intern_dashboard(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    performance_reviews = PerformanceReview.objects.filter(user=user).order_by("-id")[:3]
+
+    data = {
+        'user': user,
+        'performance_reviews': performance_reviews,
+        }
+
+    return render(request, "intern/intern_dashboard.html", data)
 
 
 def Self_Assessment(request):
