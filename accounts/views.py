@@ -207,6 +207,20 @@ def intern_dashboard(request, user_id):
 
     return render(request, "intern/intern_dashboard.html", data)
 
+def intern_performance_details(request, review_id):
+    review = get_object_or_404(PerformanceReview, id=review_id)
+    user = review.user  
+
+
+
+    data = {
+        'review': review,
+        'user': user,
+
+    }
+
+    return render(request, "intern/intern_performance_detail.html", data)
+
 
 def Self_Assessment(request):
     return render(request, "intern/Self_Assessment.html")

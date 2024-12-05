@@ -82,7 +82,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>{{ review.user.username }}</span>
                     <span class="badge bg-success">{{ review.date|date:'Y-m-d H:i' }}</span>
-                    <a href="{% url 'performance_details' review.id %}"><button class="btn btn-primary btn-sm">View Details</button></a>
+                    <a href="{% url 'intern_performance_details' review.id %}"><button class="btn btn-primary btn-sm">View Details</button></a>
 
                 </li>
                 {% endfor %}
