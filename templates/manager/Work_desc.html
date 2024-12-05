@@ -67,77 +67,51 @@
                 </div>
               </div>
 
-              <!-- Performance Metrics Tab -->
-              <div class="tab-pane fade" id="performance_metrics">
-                <h3 class="text-center mb-4">Performance Metrics</h3>
-                <div class="card p-4 shadow-sm border-1 mb-4">
-                  <form action="{% url 'work_desc' user.id %}" method="post">
-                    {% csrf_token %}
-                      <form action="/submit-review" method="POST">
-                        <!-- Productivity Score -->
-                          <div class="mb-3">
-                              <label for="productivity_score" class="form-label">Productivity Score</label>
-                              <input type="number" class="form-control" id="productivity_score" name="productivity_score" min="0" max="100" placeholder="Score (0-100)" required>
-                          </div>
-              
-                          <!-- Punctuality Score -->
-                          <div class="mb-3">
-                              <label for="punctuality_score" class="form-label">Punctuality Score</label>
-                              <input type="number" class="form-control" id="punctuality_score" name="punctuality_score" min="0" max="100" placeholder="Score (0-100)" required>
-                          </div>
-              
-                          <!-- Collaboration Score -->
-                          <div class="mb-3">
-                              <label for="collaboration_score" class="form-label">Collaboration Score</label>
-                              <input type="number" class="form-control" id="collaboration_score" name="collaboration_score" min="0" max="100" placeholder="Score (0-100)" required>
-                          </div>
-              
-                          <!-- Goals -->
-                          <div class="mb-3">
-                              <label for="goals" class="form-label">Goals</label>
-                              <textarea class="form-control" id="goals" name="goals" rows="3" placeholder="Set goals for the user" required></textarea>
-                          </div>
-                      
-                    {% for metric in metrics %}
-                      <!-- Hidden input to identify the performance review form submission -->
-                      <input type="hidden" name="savePerformance" value="true">
+<!-- Performance Metrics Tab -->
+<div class="tab-pane fade" id="performance_metrics">
+  <h3 class="text-center mb-4">Performance Metrics</h3>
+  <div class="card p-4 shadow-sm border-1 mb-4">
+    <form action="{% url 'work_desc' user.id %}" method="post">
+      {% csrf_token %}
+      <!-- Hidden input to identify the performance review form submission -->
+      <input type="hidden" name="savePerformance" value="true">
+      
+      <!-- Productivity Score -->
+      <div class="mb-3">
+        <label for="productivity" class="form-label">Productivity Score</label>
+        <input type="number" class="form-control" id="productivity" name="productivity" min="0" max="100" placeholder="Score (0-100)" required>
+      </div>
 
-                      <div>
-                          <label for="productivity">Productivity</label>
-                          <input type="number" id="productivity" name="productivity" required>
-                      </div>
-                      <div>
-                          <label for="punctuality">Punctuality</label>
-                          <input type="number" id="punctuality" name="punctuality" required>
-                      </div>
-                      <div>
-                          <label for="collaboration">Collaboration</label>
-                          <input type="number" id="collaboration" name="collaboration" required>
-                      </div>
-                      <div>
-                          <label for="goal">Goals</label>
-                          <textarea id="goal" name="goal" required></textarea>
-                      </div>
-                      <div>
-                          <label for="feedbackText">Feedback</label>
-                          <textarea id="feedbackText" name="feedbackText" required></textarea>
-                      </div>
-                      <div class="mb-3">
-                        <label for="{{ metric.id }}" class="form-label">{{ metric.label }}</label>
-                        <input type="number" id="{{ metric.id }}" name="{{ metric.name }}" class="form-control text-success" max="100" min="1" />
-                      </div>
-                    {% endfor %}
-                    <div class="mb-3">
-                      <label for="feedbackText" class="form-label">Provide Your Feedback:</label>
-                      <textarea class="form-control" name="feedbackText" id="feedbackText" rows="4" placeholder="Write your feedback here..."></textarea>
-                    </div>
-                    <div class="text-end mt-3">
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+      <!-- Punctuality Score -->
+      <div class="mb-3">
+        <label for="punctuality" class="form-label">Punctuality Score</label>
+        <input type="number" class="form-control" id="punctuality" name="punctuality" min="0" max="100" placeholder="Score (0-100)" required>
+      </div>
 
+      <!-- Collaboration Score -->
+      <div class="mb-3">
+        <label for="collaboration" class="form-label">Collaboration Score</label>
+        <input type="number" class="form-control" id="collaboration" name="collaboration" min="0" max="100" placeholder="Score (0-100)" required>
+      </div>
+
+      <!-- Goals -->
+      <div class="mb-3">
+        <label for="goal" class="form-label">Goals</label>
+        <textarea class="form-control" id="goal" name="goal" rows="3" placeholder="Set goals for the user" required></textarea>
+      </div>
+
+      <!-- Feedback -->
+      <div class="mb-3">
+        <label for="feedbackText" class="form-label">Provide Your Feedback:</label>
+        <textarea class="form-control" id="feedbackText" name="feedbackText" rows="4" placeholder="Write your feedback here..." required></textarea>
+      </div>
+
+      <div class="text-end mt-3">
+        <button type="submit", name="savePerformance" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
               <!-- Assign Goals Tab -->
               <div class="tab-pane fade" id="assign-goal">
                 <h3 class="text-center mb-4">Assign Goal</h3>
@@ -160,6 +134,8 @@
                 <div class="card p-4 shadow-sm border-1 mb-4">
                     <form method="POST" action="{% url 'work_desc' user.id %}" id="scheduleReviewForm">
                         {% csrf_token %}
+                        <!-- Hidden input to identify the performance review form submission -->
+                        <input type="hidden" name="scheduleReview" value="true">
                         <div class="mb-3">
                             <label for="reviewTitle" class="form-label">Review Title</label>
                             <input type="text" class="form-control" name="reviewTitle" id="reviewTitle" placeholder="Enter review title" required />
