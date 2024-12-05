@@ -74,6 +74,29 @@
                   <form action="{% url 'work_desc' user.id %}" method="post">
                     {% csrf_token %}
                     {% for metric in metrics %}
+                      <!-- Hidden input to identify the performance review form submission -->
+                      <input type="hidden" name="savePerformance" value="true">
+
+                      <div>
+                          <label for="productivity">Productivity</label>
+                          <input type="number" id="productivity" name="productivity" required>
+                      </div>
+                      <div>
+                          <label for="punctuality">Punctuality</label>
+                          <input type="number" id="punctuality" name="punctuality" required>
+                      </div>
+                      <div>
+                          <label for="collaboration">Collaboration</label>
+                          <input type="number" id="collaboration" name="collaboration" required>
+                      </div>
+                      <div>
+                          <label for="goal">Goals</label>
+                          <textarea id="goal" name="goal" required></textarea>
+                      </div>
+                      <div>
+                          <label for="feedbackText">Feedback</label>
+                          <textarea id="feedbackText" name="feedbackText" required></textarea>
+                      </div>
                       <div class="mb-3">
                         <label for="{{ metric.id }}" class="form-label">{{ metric.label }}</label>
                         <input type="number" id="{{ metric.id }}" name="{{ metric.name }}" class="form-control text-success" max="100" min="1" />
