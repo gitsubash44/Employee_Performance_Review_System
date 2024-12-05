@@ -56,7 +56,7 @@
         <h2><a class="navbar-brand text-center py-3" href="#">Intern Portal</a></h2>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'intern_dashboard' %}">Dashboard</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'intern_dashboard' user.id %}">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'goals' %}">Goals</a>
@@ -78,18 +78,14 @@
         <div class="card p-4 shadow mb-4">
             <h4>Performance Reviews</h4>
             <ul class="list-group list-group-flush">
+                {% for review in performance_reviews %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Q1 Review</span>
-                    <span class="badge bg-success">Positive</span>
+                    <span>{{ review.user.username }}</span>
+                    <span class="badge bg-success">{{ review.date|date:'Y-m-d H:i' }}</span>
+                    <a href="{% url 'performance_details' review.id %}"><button class="btn btn-primary btn-sm">View Details</button></a>
+
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Q2 Review</span>
-                    <span class="badge bg-warning">Needs Improvement</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>Q3 Review</span>
-                    <span class="badge bg-success">Positive</span>
-                </li>
+                {% endfor %}
             </ul>
         </div>
 
