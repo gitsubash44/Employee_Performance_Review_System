@@ -73,6 +73,31 @@
                 <div class="card p-4 shadow-sm border-1 mb-4">
                   <form action="{% url 'work_desc' user.id %}" method="post">
                     {% csrf_token %}
+                      <form action="/submit-review" method="POST">
+                        <!-- Productivity Score -->
+                          <div class="mb-3">
+                              <label for="productivity_score" class="form-label">Productivity Score</label>
+                              <input type="number" class="form-control" id="productivity_score" name="productivity_score" min="0" max="100" placeholder="Score (0-100)" required>
+                          </div>
+              
+                          <!-- Punctuality Score -->
+                          <div class="mb-3">
+                              <label for="punctuality_score" class="form-label">Punctuality Score</label>
+                              <input type="number" class="form-control" id="punctuality_score" name="punctuality_score" min="0" max="100" placeholder="Score (0-100)" required>
+                          </div>
+              
+                          <!-- Collaboration Score -->
+                          <div class="mb-3">
+                              <label for="collaboration_score" class="form-label">Collaboration Score</label>
+                              <input type="number" class="form-control" id="collaboration_score" name="collaboration_score" min="0" max="100" placeholder="Score (0-100)" required>
+                          </div>
+              
+                          <!-- Goals -->
+                          <div class="mb-3">
+                              <label for="goals" class="form-label">Goals</label>
+                              <textarea class="form-control" id="goals" name="goals" rows="3" placeholder="Set goals for the user" required></textarea>
+                          </div>
+                      
                     {% for metric in metrics %}
                       <!-- Hidden input to identify the performance review form submission -->
                       <input type="hidden" name="savePerformance" value="true">
@@ -129,62 +154,61 @@
                   </form>
                 </div>
               </div>
-<!-- Reviews Scheduling Tab -->
-<div class="tab-pane fade" id="review-scheduling">
-  <h3 class="text-center mb-4">Review Scheduling</h3>
-  <div class="card p-4 shadow-sm border-1 mb-4">
-      <form method="POST" action="{% url 'work_desc' user.id %}" id="scheduleReviewForm">
-          {% csrf_token %}
-          <div class="mb-3">
-              <label for="reviewTitle" class="form-label">Review Title</label>
-              <input type="text" class="form-control" name="reviewTitle" id="reviewTitle" placeholder="Enter review title" required />
-          </div>
-          <div class="mb-3">
-              <label for="reviewDate" class="form-label">Review Date</label>
-              <input type="date" class="form-control" name="reviewDate" id="reviewDate" required />
-          </div>
-          <div class="mb-3">
-              <label for="reviewTime" class="form-label">Review Time</label>
-              <input type="time" class="form-control" name="reviewTime" id="reviewTime" required />
-          </div>
-          <button type="submit" name="scheduleReview" class="btn btn-primary">Schedule Review</button>
-      </form>
-  </div>
+              <!-- Reviews Scheduling Tab -->
+              <div class="tab-pane fade" id="review-scheduling">
+                <h3 class="text-center mb-4">Review Scheduling</h3>
+                <div class="card p-4 shadow-sm border-1 mb-4">
+                    <form method="POST" action="{% url 'work_desc' user.id %}" id="scheduleReviewForm">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="reviewTitle" class="form-label">Review Title</label>
+                            <input type="text" class="form-control" name="reviewTitle" id="reviewTitle" placeholder="Enter review title" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewDate" class="form-label">Review Date</label>
+                            <input type="date" class="form-control" name="reviewDate" id="reviewDate" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="reviewTime" class="form-label">Review Time</label>
+                            <input type="time" class="form-control" name="reviewTime" id="reviewTime" required />
+                        </div>
+                        <button type="submit" name="scheduleReview" class="btn btn-primary">Schedule Review</button>
+                    </form>
+                </div>
 
-  <!-- Upcoming Reviews Table -->
-  <div class="card">
-      <div class="card-header bg-secondary text-white">Upcoming Reviews</div>
-      <div class="card-body">
-          <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>Review Title</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {% for review in upcoming_reviews %}
-                      <tr>
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ review.review_title }}</td>
-                          <td>{{ review.review_date }}</td>
-                          <td>{{ review.review_time }}</td>
-                      </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-      </div>
-  </div>
-</div>
-
+              <!-- Upcoming Reviews Table -->
+              <div class="card">
+                  <div class="card-header bg-secondary text-white">Upcoming Reviews</div>
+                  <div class="card-body">
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Review Title</th>
+                                  <th>Date</th>
+                                  <th>Time</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for review in upcoming_reviews %}
+                                  <tr>
+                                      <td>{{ forloop.counter }}</td>
+                                      <td>{{ review.review_title }}</td>
+                                      <td>{{ review.review_date }}</td>
+                                      <td>{{ review.review_time }}</td>
+                                  </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
