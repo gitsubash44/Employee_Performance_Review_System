@@ -71,8 +71,32 @@
               <div class="tab-pane fade" id="performance_metrics">
                 <h3 class="text-center mb-4">Performance Metrics</h3>
                 <div class="card p-4 shadow-sm border-1 mb-4">
+                  {% csrf_token %}
                   <form action="{% url 'work_desc' user.id %}" method="post">
-                    {% csrf_token %}
+                                  <!-- Productivity Score -->
+                                  <div class="mb-3">
+                                      <label for="productivity" class="form-label">Productivity Score</label>
+                                      <input type="number" class="form-control" id="productivity" name="productivity" placeholder="Enter score (1-100)" required>
+                                  </div>
+              
+                                  <!-- Punctuality Score -->
+                                  <div class="mb-3">
+                                      <label for="punctuality" class="form-label">Punctuality Score</label>
+                                      <input type="number" class="form-control" id="punctuality" name="punctuality" placeholder="Enter score (1-100)" required>
+                                  </div>
+              
+                                  <!-- Collaboration Score -->
+                                  <div class="mb-3">
+                                      <label for="collaboration" class="form-label">Collaboration Score</label>
+                                      <input type="number" class="form-control" id="collaboration" name="collaboration" placeholder="Enter score (1-100)" required>
+                                  </div>
+              
+                                  <!-- Goals -->
+                                  <div class="mb-3">
+                                      <label for="goal" class="form-label">Goal Achivement</label>
+                                      <input type="number"  class="form-control" id="goal" name="goal" placeholder="Enter Goal Achivement (1-100)" required>
+                                  </div>
+                    
                     {% for metric in metrics %}
                       <div class="mb-3">
                         <label for="{{ metric.id }}" class="form-label">{{ metric.label }}</label>
