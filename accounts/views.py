@@ -92,7 +92,7 @@ def work_desc(request, user_id):
     performance_reviews = PerformanceReview.objects.filter(user=user).order_by("-id")[:3]
     upcoming_reviews = ReviewScheduling.objects.filter(user=user).order_by("-id")[:3]
 
-    if request.method =="POST":
+    if "savePerformance" in request.POST:
         productivity_score = request.POST.get("productivity")
         punctuality_score = request.POST.get("punctuality")
         collaboration_score = request.POST.get("collaboration")
