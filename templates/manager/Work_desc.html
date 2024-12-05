@@ -73,6 +73,31 @@
                 <div class="card p-4 shadow-sm border-1 mb-4">
                   <form action="{% url 'work_desc' user.id %}" method="post">
                     {% csrf_token %}
+                      <form action="/submit-review" method="POST">
+                        <!-- Productivity Score -->
+                          <div class="mb-3">
+                              <label for="productivity_score" class="form-label">Productivity Score</label>
+                              <input type="number" class="form-control" id="productivity_score" name="productivity_score" min="0" max="100" placeholder="Score (0-100)" required>
+                          </div>
+              
+                          <!-- Punctuality Score -->
+                          <div class="mb-3">
+                              <label for="punctuality_score" class="form-label">Punctuality Score</label>
+                              <input type="number" class="form-control" id="punctuality_score" name="punctuality_score" min="0" max="100" placeholder="Score (0-100)" required>
+                          </div>
+              
+                          <!-- Collaboration Score -->
+                          <div class="mb-3">
+                              <label for="collaboration_score" class="form-label">Collaboration Score</label>
+                              <input type="number" class="form-control" id="collaboration_score" name="collaboration_score" min="0" max="100" placeholder="Score (0-100)" required>
+                          </div>
+              
+                          <!-- Goals -->
+                          <div class="mb-3">
+                              <label for="goals" class="form-label">Goals</label>
+                              <textarea class="form-control" id="goals" name="goals" rows="3" placeholder="Set goals for the user" required></textarea>
+                          </div>
+                      
                     {% for metric in metrics %}
                       <div class="mb-3">
                         <label for="{{ metric.id }}" class="form-label">{{ metric.label }}</label>
