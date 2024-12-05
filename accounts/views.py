@@ -196,6 +196,10 @@ def employer_dashboard(request):
 def intern_dashboard(request):
     return render(request, "intern/intern_dashboard.html")
 
+
+def Self_Assessment(request):
+    return render(request, "intern/Self_Assessment.html")
+
 def goals(request):
     # Query all goals from the database
     goals = Goal.objects.all()
