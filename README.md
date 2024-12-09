@@ -72,4 +72,3 @@ Backend: Django framework for managing business logic and database interactions.
 Database: PostgreSQL or SQLite for storing user data, reviews, and performance metrics.
 Frontend: HTML, CSS, and JavaScript for designing user interfaces, with Bootstrap for responsiveness.
 
-![Screenshot 2024-11-10 145949](https://github.com/user-attachments/assets/af55fdaf-3bc7-4cd6-8c96-8f0da6a989e6)
