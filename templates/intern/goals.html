@@ -56,7 +56,7 @@
         <h2><a class="navbar-brand text-center py-3" href="#">Intern Portal</a></h2>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="{% url 'intern_dashboard' %}">Dashboard</a>
+                <a class="nav-link " aria-current="page" href="{% url 'intern_dashboard' user.id %}">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{% url 'goals' %}">Goals</a>
@@ -157,6 +157,48 @@
               </div>
             </div>
           </div>
+
+
+          <!-- Goals List -->
+        <div class="row">
+          <div class="col-md-12">
+              <div class="card mb-3">
+                  <div class="card-header bg-primary text-white">
+                      <h5 class="mb-0">Goal 1: Complete Project Proposal</h5>
+                  </div>
+                  <div class="card-body">
+                      <p><strong>Description:</strong> Prepare and submit the project proposal outlining all the key deliverables.</p>
+                      <p><strong>Deadline:</strong> December 15, 2024</p>
+                      <p><strong>Level:</strong> <span class="badge bg-success">High</span></p>
+                      <button class="btn btn-outline-primary btn-sm">Update Progress</button>
+                  </div>
+              </div>
+
+              <div class="card mb-3">
+                  <div class="card-header bg-success text-white">
+                      <h5 class="mb-0">Goal 2: Attend Weekly Training</h5>
+                  </div>
+                  <div class="card-body">
+                      <p><strong>Description:</strong> Participate in weekly skill-building sessions with the team.</p>
+                      <p><strong>Deadline:</strong> Ongoing</p>
+                      <p><strong>Level:</strong> <span class="badge bg-warning">Medium</span></p>
+                      <button class="btn btn-outline-success btn-sm">Update Progress</button>
+                  </div>
+              </div>
+
+              <div class="card mb-3">
+                  <div class="card-header bg-warning text-dark">
+                      <h5 class="mb-0">Goal 3: Submit Performance Report</h5>
+                  </div>
+                  <div class="card-body">
+                      <p><strong>Description:</strong> Analyze performance metrics and submit a detailed report to the manager.</p>
+                      <p><strong>Deadline:</strong> December 20, 2024</p>
+                      <p><strong>Level:</strong> <span class="badge bg-danger">Low</span></p>
+                      <button class="btn btn-outline-warning btn-sm">Update Progress</button>
+                  </div>
+              </div>
+          </div>
+      </div>
         
     </div>    
 
