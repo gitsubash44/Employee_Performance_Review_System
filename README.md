@@ -71,3 +71,4 @@ Technical Requirements:
 Backend: Django framework for managing business logic and database interactions.
 Database: PostgreSQL or SQLite for storing user data, reviews, and performance metrics.
 Frontend: HTML, CSS, and JavaScript for designing user interfaces, with Bootstrap for responsiveness.
+
