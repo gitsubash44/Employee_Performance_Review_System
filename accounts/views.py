@@ -234,6 +234,9 @@ def goals(request):
     return render(request, "intern/goals.html", context)
 
 
+def goals_history(request):
+    return render(request, "intern/goals_history.html")
+
 # intern
 def employee_dashboard(request):
     return render(request, "intern/employee_dashboard.html")
