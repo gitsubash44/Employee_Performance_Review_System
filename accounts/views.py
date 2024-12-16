@@ -251,12 +251,9 @@ def assign_goals(request):
         goal.save()
 
 
-<<<<<<< HEAD
-=======
 def goals_history(request):
     return render(request, "intern/goals_history.html")
 
 # intern
->>>>>>> 64b6c4fddfb7a0bf1e42dcaebb302de54c633287
 def employee_dashboard(request):
     return render(request, "intern/employee_dashboard.html")
