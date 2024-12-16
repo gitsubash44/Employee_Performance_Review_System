@@ -118,36 +118,32 @@
               </div>
               <div class="tab-pane fade" id="assign-goal">
                 <h3 class="text-center mb-4">Assign Goal</h3>
+            
+                {% if success %}
+                <div class="alert alert-success">{{ success }}</div>
+                {% endif %}
+            
                 <div class="card p-4 shadow-sm border-1 mb-4">
-                  <form method="POST" action="{% url 'assign_goal' %}">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                      <label for="goalTitle" class="form-label">Goal Title</label>
-                      <input type="text" class="form-control" id="goalTitle" name="title" required placeholder="Enter goal title">
-                    </div>
-                    <div class="mb-3">
-                      <label for="goalDescription" class="form-label">Goal Description</label>
-                      <textarea class="form-control" id="goalDescription" name="description" rows="3" required placeholder="Write goal description here..."></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label for="goalDeadline" class="form-label">Deadline</label>
-                      <input type="date" class="form-control" id="goalDeadline" name="deadline" required>
-                    </div>
-                    <div class="mb-3">
-                      <label for="assignedTo" class="form-label">Assign to</label>
-                      <select class="form-control" id="assignedTo" name="assigned_to" required>
-                        <option value="" disabled selected>Select a user</option>
-                        {% for user in users %}
-                          <option value="{{ user.id }}">{{ user.username }}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                    <div class="text-end mt-3">
-                      <button type="submit" class="btn btn-primary">Assign Goal</button>
-                    </div>
-                  </form>
+                    <form method="POST" action="{% url 'assign_goal' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                          <label for="goalTitle" class="form-label">Goal Title</label>
+                          <input type="text" class="form-control" id="goalTitle" name="title" required placeholder="Enter goal title">
+                      </div>
+                      <div class="mb-3">
+                          <label for="goalDescription" class="form-label">Goal Description</label>
+                          <textarea class="form-control" id="goalDescription" name="description" rows="3" required placeholder="Write goal description here..."></textarea>
+                      </div>
+                      <div class="mb-3">
+                          <label for="goalDeadline" class="form-label">Deadline</label>
+                          <input type="date" class="form-control" id="goalDeadline" name="deadline" required>
+                      </div>
+                      <div class="text-end mt-3">
+                          <button type="submit" class="btn btn-primary">Assign Goal</button>
+                      </div>
+                    </form>
                 </div>
-              </div>
+            </div>
               <!-- Reviews Scheduling Tab -->
               <div class="tab-pane fade" id="review-scheduling">
                 <h3 class="text-center mb-4">Review Scheduling</h3>
