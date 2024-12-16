@@ -226,14 +226,30 @@ def Self_Assessment(request):
     return render(request, "intern/Self_Assessment.html")
 
 def goals(request):
-    # Query all goals from the database
     goals = Goal.objects.all()
     context = {
-        'goals': Goal
+        'goals': goals
     }
     return render(request, "intern/goals.html", context)
 
+def assign_goals(request):
+    users = CustomUser.objects.filter(user_type__in=[UserTypes.INTERN, UserTypes.EMPLOYER])  # Adjust as needed
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        deadline = request.POST.get('deadline')
+        assigned_to_id = request.POST.get('assigned_to')
+        assigned_to = CustomUser.objects.get(id=assigned_to_id)
 
-# intern
+        # Create and save the goal
+        goal = Goal.objects.create(
+            title=title,
+            description=description,
+            deadline=deadline,
+            assigned_to=assigned_to
+        )
+        goal.save()
+
+
 def employee_dashboard(request):
     return render(request, "intern/employee_dashboard.html")
