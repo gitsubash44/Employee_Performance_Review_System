@@ -188,8 +188,6 @@ def UpCommingReview(request):
 
 
 
-
-
 # employer
 def employer_dashboard(request):
     return render(request, "employer/employer_dashboard.html")
@@ -233,17 +231,11 @@ def goals(request):
     return render(request, "intern/goals.html", context)
 
 def assign_goals(request):
-    users = CustomUser.objects.filter(user_type__in=[UserTypes.INTERN, UserTypes.EMPLOYER]) 
-    goals = Goal.objects.all() 
-
+    users = CustomUser.objects.filter(user_type__in=[UserTypes.INTERN, UserTypes.EMPLOYER])  # Adjust as needed
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
-        deadline_str = request.POST.get('deadline')
-
-        # Convert the date string to a datetime object
-        deadline = datetime.strptime(deadline_str, '%Y-%m-%d') if deadline_str else None
-        
+        deadline = request.POST.get('deadline')
         assigned_to_id = request.POST.get('assigned_to')
         assigned_to = CustomUser.objects.get(id=assigned_to_id)
 
@@ -255,15 +247,6 @@ def assign_goals(request):
             assigned_to=assigned_to
         )
         goal.save()
-
-        data = {
-            'users': users,
-            'goals': goals,
-        }
-        return redirect('manager_dashboard')
-
-    return render(request, "intern/workdesc.html", data)
-
 
 
 def goals_history(request):
