@@ -174,14 +174,25 @@ def allReview(request, user_id):
 def assign_goal(request):
     if request.method == 'POST':
         description = request.POST.get('description')
-        if description.strip():  # Ensure the description is not empty or just whitespace
-            Goal.objects.create(description=description, status='in_progress', progress=0)
+        title = request.POST.get('title')  # Capture the title
+        deadline = request.POST.get('deadline')
+        if title.strip() and description.strip():  # Ensure title and description are not empty
+            Goal.objects.create(
+                title=title,
+                description=description,
+                status='in_progress',
+                progress=0,
+                deadline=deadline if deadline else None  # Set deadline if provided
+            )
             messages.success(request, "Goal assigned successfully!")
         else:
-            messages.error(request, "Goal description cannot be empty!")
+            messages.error(request, "Goal title and description cannot be empty!")
         return redirect('assign_goal')  # Ensure this URL pattern is defined
-    goals = Goal.objects.all()  # Fetch all goals to display
-    return render(request, 'manager/Work_desc.html', {'goals': goals})
+    goals = Goal.objects.all()
+    data={
+        'goals': goals,
+    }
+    return render(request, 'manager/Work_desc.html', data)
 
 def UpCommingReview(request):
     return render(request, "manager/UpCommingReview.html")
