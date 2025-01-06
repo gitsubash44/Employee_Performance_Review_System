@@ -41,9 +41,9 @@ class Goal(models.Model):
         ('achieved', 'Achieved'),
         ('missed', 'Missed'),
     ]
-    title = models.CharField(max_length=100, null=True, default="Untitled Goal")
+    title = models.CharField(max_length=100, null=True)
     description = models.TextField()
-    status = models.CharField(choices=STATUS_CHOICES, default='in_progress')
+    status = models.CharField(choices=STATUS_CHOICES)
     progress = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     deadline = models.DateTimeField(null=True)

@@ -255,3 +255,7 @@ def goals_history(request):
 # intern
 def employee_dashboard(request):
     return render(request, "intern/employee_dashboard.html")
+
+
+
+# For Logout
