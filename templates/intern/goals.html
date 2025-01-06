@@ -65,7 +65,7 @@
                 <a class="nav-link " href="{% url 'Self_Assessment' %}">Self-Assessmentals</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-danger" href="#">Logout</a>
+                <a class="nav-link text-danger" href="{% url 'logout' %}">Logout</a>
             </li>
         </ul>
     </nav>
@@ -91,7 +91,7 @@
     {% empty %}
         <p>No goals assigned yet.</p>
     {% endfor %}
-    <div class="mb-4">
+    <div class="mb-8">
         <a href="{% url 'goals_history' %}">
             <button type="submit" class="btn btn-primary">View Goals History</button>
         </a>
@@ -101,7 +101,7 @@
 
 
 
-    <div class="card">
+    <div class="col-md-3 card">
       <div class="card-header bg-secondary text-white">
         <h5>Update Goal Progress</h5>
       </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import CustomUser, UserTypes, PerformanceReview, Goal, ReviewScheduling
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 from datetime import datetime
 
@@ -270,3 +270,9 @@ def employee_dashboard(request):
 
 
 # For Logout
+def logout_view(request):
+    """
+    Logs out the user and redirects to the homepage.
+    """
+    logout(request)
+    return redirect('/')  # Redirect to the homepage or login page

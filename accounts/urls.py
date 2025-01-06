@@ -31,5 +31,6 @@ urlpatterns = [
     # Employees 
     path('employee_dashboard/', views.employee_dashboard, name="employee_dashboard"),
     
+    path('logout/', views.logout_view, name='logout'),  # Logout URL
 
 ]
