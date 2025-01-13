@@ -124,24 +124,24 @@
                 {% endif %}
             
                 <div class="card p-4 shadow-sm border-1 mb-4">
-                    <form method="POST" action="{% url 'assign_goal' %}">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                          <label for="goalTitle" class="form-label">Goal Title</label>
-                          <input type="text" class="form-control" id="goalTitle" name="title" required placeholder="Enter goal title">
-                      </div>
-                      <div class="mb-3">
-                          <label for="goalDescription" class="form-label">Goal Description</label>
-                          <textarea class="form-control" id="goalDescription" name="description" rows="3" required placeholder="Write goal description here..."></textarea>
-                      </div>
-                      <div class="mb-3">
-                          <label for="goalDeadline" class="form-label">Deadline</label>
-                          <input type="date" class="form-control" id="goalDeadline" name="deadline" required>
-                      </div>
-                      <div class="text-end mt-3">
-                          <button type="submit" class="btn btn-primary">Assign Goal</button>
-                      </div>
-                    </form>
+                  <form method="POST" action="{% url 'assign_goal' user.id %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="goalTitle" class="form-label">Goal Title</label>
+                        <input type="text" class="form-control" id="goalTitle" name="title" required placeholder="Enter goal title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="goalDescription" class="form-label">Goal Description</label>
+                        <textarea class="form-control" id="goalDescription" name="description" rows="3" required placeholder="Write goal description here..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="goalDeadline" class="form-label">Deadline</label>
+                        <input type="date" class="form-control" id="goalDeadline" name="deadline" required>
+                    </div>
+                    <div class="text-end mt-3">
+                        <button type="submit" class="btn btn-primary">Assign Goal</button>
+                    </div>
+                </form>
                 </div>
             </div>
               <!-- Reviews Scheduling Tab -->

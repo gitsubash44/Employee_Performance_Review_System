@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 from datetime import datetime
+from django.utils.timezone import now
+
 
 
 
@@ -77,6 +79,7 @@ def manager_dashboard(request):
 
     employees = CustomUser.objects.filter(user_type=UserTypes.EMPLOYER)
     interns = CustomUser.objects.filter(user_type=UserTypes.INTERN)
+    
     # print(request.user.user_type)
     context = {
         'employees': employees,
@@ -91,6 +94,8 @@ def work_desc(request, user_id):
     # Fetching all performance reviews for the user
     performance_reviews = PerformanceReview.objects.filter(user=user).order_by("-id")[:3]
     upcoming_reviews = ReviewScheduling.objects.filter(user=user).order_by("-id")[:3]
+    assigned_goals = Goal.objects.filter(assigned_to=user).order_by("-id")[:5]
+
 
     if "savePerformance" in request.POST:
         productivity_score = request.POST.get("productivity")
@@ -135,13 +140,11 @@ def work_desc(request, user_id):
         except Exception as e:
             messages.error(request, f"Error in scheduling review: {e}")
 
-        return redirect("work_desc", user_id=user.id)
-
-
     context = {
         'user': user,
         'performance_reviews': performance_reviews,
         'upcoming_reviews': upcoming_reviews,
+        'assigned_goals': assigned_goals,
 
     }
     return render(request, "manager/work_desc.html", context)
@@ -170,27 +173,30 @@ def allReview(request, user_id):
     }
     return render(request, "manager/allReview.html", data)
 
-# For Assing Goals
-def assign_goal(request):
+def assign_goal(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)  # Get the user object
     if request.method == 'POST':
+        title = request.POST.get('title')
         description = request.POST.get('description')
-        title = request.POST.get('title')  # Capture the title
         deadline = request.POST.get('deadline')
+
         if title.strip() and description.strip():  # Ensure title and description are not empty
             Goal.objects.create(
                 title=title,
                 description=description,
                 status='in_progress',
                 progress=0,
-                deadline=deadline if deadline else None  # Set deadline if provided
+                deadline=deadline if deadline else None,  # Set deadline if provided
+                assigned_to=user  # Link the goal to the user
             )
             messages.success(request, "Goal assigned successfully!")
         else:
             messages.error(request, "Goal title and description cannot be empty!")
-        return redirect('assign_goal')  # Ensure this URL pattern is defined
-    goals = Goal.objects.all()
-    data={
+
+    goals = Goal.objects.filter(assigned_to=user)  # Get goals assigned to this user
+    data = {
         'goals': goals,
+        'user': user,  # Pass the user object to the template
     }
     return render(request, 'manager/Work_desc.html', data)
 
@@ -235,33 +241,83 @@ def Self_Assessment(request):
     return render(request, "intern/Self_Assessment.html")
 
 def goals(request):
-    goals = Goal.objects.all()
+    user = request.user  # Get the currently logged-in user
+
+    # Update missed status for goals whose deadlines have passed and are not achieved
+    for goal in Goal.objects.filter(assigned_to=user):  # Filter goals by the logged-in user
+        if goal.deadline and now() > goal.deadline and goal.status != "achieved":
+            goal.status = "missed"
+            goal.save()
+
+    # Retrieve the latest 3 goals assigned to the current user
+    goals = Goal.objects.filter(assigned_to=user).order_by("-id")[:3]
+
     context = {
         'goals': goals
     }
     return render(request, "intern/goals.html", context)
 
 def assign_goals(request):
-    users = CustomUser.objects.filter(user_type__in=[UserTypes.INTERN, UserTypes.EMPLOYER])  # Adjust as needed
+# Fetch only interns or specific user types
+    users = CustomUser.objects.filter(user_type=UserTypes.INTERN)
+
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
         deadline = request.POST.get('deadline')
         assigned_to_id = request.POST.get('assigned_to')
-        assigned_to = CustomUser.objects.get(id=assigned_to_id)
 
-        # Create and save the goal
-        goal = Goal.objects.create(
-            title=title,
-            description=description,
-            deadline=deadline,
-            assigned_to=assigned_to
-        )
-        goal.save()
+        # Check if all necessary fields are provided
+        if not title or not description or not deadline or not assigned_to_id:
+            messages.error(request, "All fields are required.")
+            return redirect('assign_goal')  # Adjust URL name if needed
+
+        try:
+            assigned_to = CustomUser.objects.get(id=assigned_to_id)
+
+            # Create and save the goal
+            Goal.objects.create(
+                title=title,
+                description=description,
+                deadline=deadline,
+                assigned_to=assigned_to
+            )
+            messages.success(request, f"Goal '{title}' has been assigned to {assigned_to.username}.")
+            return redirect('assign_goal')  # Adjust URL name if needed
+
+        except CustomUser.DoesNotExist:
+            messages.error(request, "Invalid user selected.")
+            return redirect('assign_goal')
+
+    context = {
+        'users': users
+    }
+    return render(request, "manager/work_desc.html", context)
+
+
+
 
 
 def goals_history(request):
-    return render(request, "intern/goals_history.html")
+    if request.method == "POST":
+        goal_id = request.POST.get("goal_id")
+        action = request.POST.get("action")
+        goal = get_object_or_404(Goal, id=goal_id)
+
+        if action == "complete":
+            goal.status = "achieved"
+            goal.completed = True
+            goal.save()
+
+    # Update missed status for goals past their deadline
+    for goal in Goal.objects.all():
+        if goal.deadline and now() > goal.deadline and goal.status != "achieved":
+            goal.status = "missed"
+            goal.save()
+
+    goals = Goal.objects.all()
+    context = {"goals": goals}
+    return render(request, "intern/goals_history.html", context)
 
 # intern
 def employee_dashboard(request):

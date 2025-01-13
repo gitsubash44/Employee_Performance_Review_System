@@ -24,45 +24,37 @@
                                 <th>Description</th>
                                 <th>Deadline</th>
                                 <th>Status</th>
-                                <th>Comments</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for goal in goals %}
                             <!-- Sample History Rows -->
                             <tr>
-                                <td>Complete Project Proposal</td>
-                                <td>Prepare and submit the project proposal outlining all the key deliverables.</td>
-                                <td>December 15, 2024</td>
-                                <td><span class="badge bg-success">Completed</span></td>
-                                <td>Submitted on time with all details covered.</td>
+                                <td>{{ goal.title }}</td>
+                                <td>{{ goal.description }}</td>
+                                <td>{{ goal.deadline|date:"F d, Y" }}</td>
+                                <td>            
+                                    <span class="badge 
+                                    {% if goal.status == 'achieved' %}bg-success
+                                    {% elif goal.status == 'missed' %}bg-danger
+                                    {% else %}bg-warning
+                                    {% endif %}">
+                                    {{ goal.get_status_display }}
+                                    </span>
+                                </td>
                                 <td class="d-flex card-footer text-end gap-2">
-                                    <a href="" class="btn btn-warning">Process</a>
-                                    <a href="" class="btn btn-success">Complete</a>
+                                    <form method="post" style="display:inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="goal_id" value="{{ goal.id }}">
+                                        <input type="hidden" name="action" value="complete">
+                                        <button type="submit" class="btn btn-success" {% if goal.status == 'achieved' %}disabled{% endif %}>
+                                            Complete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Attend Weekly Training</td>
-                                <td>Participate in weekly skill-building sessions with the team.</td>
-                                <td>Ongoing</td>
-                                <td><span class="badge bg-warning">In Progress</span></td>
-                                <td>Attended 8 out of 10 sessions so far.</td>
-                                <td class="d-flex card-footer text-end gap-2">
-                                    <a href="" class="btn btn-warning">Process</a>
-                                    <a href="" class="btn btn-success">Complete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Submit Performance Report</td>
-                                <td>Analyze performance metrics and submit a detailed report to the manager.</td>
-                                <td>December 20, 2024</td>
-                                <td><span class="badge bg-danger">Pending</span></td>
-                                <td>Awaiting final metrics before submission.</td>
-                                <td class="d-flex card-footer text-end gap-2">
-                                    <a href="" class="btn btn-warning">Process</a>
-                                    <a href="" class="btn btn-success">Complete</a>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
