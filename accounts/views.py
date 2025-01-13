@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import CustomUser, UserTypes, PerformanceReview, Goal, ReviewScheduling
+from .models import CustomUser, UserTypes, PerformanceReview, Goal, ReviewScheduling, Review
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
@@ -276,3 +276,31 @@ def logout_view(request):
     """
     logout(request)
     return redirect('/')  # Redirect to the homepage or login page
+
+
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    
+    if request.method == "POST":
+        # Get the data from the request
+        productivity_score = request.POST.get("productivity_score")
+        punctuality_score = request.POST.get("punctuality_score")
+        collaboration_score = request.POST.get("collaboration_score")
+        goals = request.POST.get("goals")
+        feedback = request.POST.get("feedback")
+
+        # Update the review instance
+        review.productivity_score = productivity_score
+        review.punctuality_score = punctuality_score
+        review.collaboration_score = collaboration_score
+        review.goals = goals
+        review.feedback = feedback
+
+        # Save the changes to the database
+        review.save()
+
+        # Redirect back to the details page or list
+        return redirect('work_desc', review.user.id)
+
+    # Render the same template with review details
+    return render(request, "edit_review.html", {"review": review})

@@ -31,6 +31,9 @@ urlpatterns = [
     # Employees 
     path('employee_dashboard/', views.employee_dashboard, name="employee_dashboard"),
     
+    
+    path('edit_review/<int:review_id>/edit/', views.edit_review, name='edit_review'),
     path('logout/', views.logout_view, name='logout'),  # Logout URL
+    
 
 ]

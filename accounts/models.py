@@ -68,3 +68,20 @@ class ReviewScheduling(models.Model):
 
     def __str__(self):
         return f"{self.review_title} - {self.review_date.strftime('%Y-%m-%d')} at {self.review_time.strftime('%H:%M')}"
+
+
+#review  
+    
+# ...existing code...
+
+class Review(models.Model):
+    reviewer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='reviews_given')
+    employee = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='reviews_received')
+    review_date = models.DateTimeField(auto_now_add=True)
+    feedback = models.TextField()
+    rating = models.IntegerField()
+
+    def __str__(self):
+        return f"Review by {self.reviewer.username} for {self.employee.username}"
+
+    
