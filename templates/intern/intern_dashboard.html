@@ -61,9 +61,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'goals' %}">Goals</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'Self_Assessment' %}">Self-Assessment</a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link text-danger" href="{% url 'logout' %}">Logout</a>
             </li>
@@ -121,21 +119,6 @@
         </div>
         </div>
 
-
-
-
-        <!-- Self-Assessment Section -->
-        <div class="card p-4 shadow">
-            <h4>Self-Assessment</h4>
-            <form>
-                <div class="mb-3">
-                    <label for="selfAssessment" class="form-label">Add Self-Assessment</label>
-                    <textarea class="form-control" id="selfAssessment" rows="4"
-                        placeholder="Write about your achievements, progress, and challenges..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Update</button>
-            </form>
-        </div>
     </div>
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
