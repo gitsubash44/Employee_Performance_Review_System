@@ -30,10 +30,6 @@ Performance Metrics:
 Review Scheduling:
 Simplifies the review process by allowing admins to schedule periodic reviews.
 Sends automated reminders to employees and reviewers about upcoming evaluations.
-
-Self-Assessment:
-  Includes forms for employees to conduct self-assessments, rate their performance, and document achievements or challenges.
-  Optional peer review functionality for employees and interns to evaluate each other's contributions.
   
 Performance Analytics:  
   Generates visual reports (graphs, tables) that highlight trends, areas for improvement, and top-performing employees.
