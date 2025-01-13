@@ -12,7 +12,7 @@
 2. Features
 User Review Dashboard:
   A personalized dashboard for office workers and interns to view their performance reviews, feedback from managers, and assigned goals.
-  Enables users to add self-assessments and progress updates, fostering personal accountability.
+  Enables users progress updates, fostering personal accountability.
 
 Admin/Manager Review Panel:
   Centralized panel for managers to create and edit performance reviews for employees and interns.
