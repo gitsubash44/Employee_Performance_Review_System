@@ -65,3 +65,25 @@ Backend: Django framework for managing business logic and database interactions.
 Database: PostgreSQL or SQLite for storing user data, reviews, and performance metrics.
 Frontend: HTML, CSS, and JavaScript for designing user interfaces, with Bootstrap for responsiveness.
 
+# 5. Functional Features in Detail
+## For Interns:
+### 1. Register
+![Register](https://github.com/user-attachments/assets/b0910276-73b8-4b18-9b26-ab83f7692791)
+
+### 2. Login
+![Login](https://github.com/user-attachments/assets/87c73498-e811-44f2-87a9-eb48d9bdf927)
+
+### 3. Dashboard
+![Dashboard](https://github.com/user-attachments/assets/2079ce9f-a54f-4dde-8b30-6a7b56e233e9)
+### 3.1 After clicking view detail of any individual review from performance review section of intern dashboard, The whole detail of that individual performance review will open.
+![image](https://github.com/user-attachments/assets/e95c9b10-df72-4d4b-ab6c-3056ce068230)
+### 3.2 Below Performance Review section in intern dashboard there is a feedback section which contain feedbacks from manager. After Clicking view button of individual feedback from the feedback section, It will open modal that will include whole Feedback givem from manager.
+![image](https://github.com/user-attachments/assets/773c1464-3f68-440e-b451-8580b92b1d0f)
+### 3.3 In the Goal section from intern portal there is a goal section that includes 3 individual goals assigend to the individual imtern.
+![image](https://github.com/user-attachments/assets/eb97699e-bf28-424d-8753-7fa47edcf286)
+###3.4 CLick View Goal History button, It will redirect to all that individual all assigned goals including pending and complete goals and aslo can set pending goals to completed.
+![image](https://github.com/user-attachments/assets/aea22240-32de-4b1c-bf72-7a7f6bcb0ab1)
+
+
+
+
