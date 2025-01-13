@@ -299,6 +299,8 @@ def assign_goals(request):
 
 
 def goals_history(request):
+    user = request.user  # Get the currently logged-in user
+
     if request.method == "POST":
         goal_id = request.POST.get("goal_id")
         action = request.POST.get("action")
@@ -315,7 +317,7 @@ def goals_history(request):
             goal.status = "missed"
             goal.save()
 
-    goals = Goal.objects.all()
+    goals = Goal.objects.filter(assigned_to=user).order_by("-id")
     context = {"goals": goals}
     return render(request, "intern/goals_history.html", context)
 
