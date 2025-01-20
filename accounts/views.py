@@ -237,9 +237,6 @@ def intern_performance_details(request, review_id):
     return render(request, "intern/intern_performance_detail.html", data)
 
 
-def Self_Assessment(request):
-    return render(request, "intern/Self_Assessment.html")
-
 def goals(request):
     user = request.user  # Get the currently logged-in user
 

@@ -26,7 +26,6 @@ urlpatterns = [
     path('intern_performance_details/<int:review_id>/', views.intern_performance_details, name='intern_performance_details'),
     path('goals/', views.goals, name="goals"),
     path('goals_history/', views.goals_history, name="goals_history"),
-    path('Self_Assessment/', views.Self_Assessment, name="Self_Assessment"),
     
     # Employees 
     path('employee_dashboard/', views.employee_dashboard, name="employee_dashboard"),
